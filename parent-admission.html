@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Online Admission Application</title>
+
+    <link
+        rel="stylesheet"
+        href="css/parent-admission.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="admission-container">
+
+        <!-- =========================================
+             HEADER
+        ========================================== -->
+
+        <header class="admission-header">
+
+            <div>
+
+                <h1>
+                    Online Admission Application
+                </h1>
+
+                <p>
+                    Please complete the form carefully.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================================
+             APPLICATION FORM
+        ========================================== -->
+
+        <form
+            id="parent-admission-form"
+            novalidate
+        >
+
+
+            <!-- =====================================
+                 STUDENT INFORMATION
+            ====================================== -->
+
+            <section class="form-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Student Information
+                    </h2>
+
+                    <p>
+                        Enter the student's personal details.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group full-width">
+
+                        <label for="student-name">
+                            Student Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="student-name"
+                            required
+                            maxlength="150"
+                            placeholder="Enter student's full name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-gender">
+                            Gender
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="student-gender"
+                            required
+                        >
+
+                            <option value="">
+                                Select gender
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-dob">
+                            Date of Birth
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="student-dob"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-pen">
+                            PEN Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="student-pen"
+                            maxlength="50"
+                            placeholder="Enter PEN number"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-category">
+                            Social Category
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="student-category"
+                            required
+                        >
+
+                            <option value="">
+                                Select category
+                            </option>
+
+                            <option value="General">
+                                General
+                            </option>
+
+                            <option value="OBC">
+                                OBC
+                            </option>
+
+                            <option value="SC">
+                                SC
+                            </option>
+
+                            <option value="ST">
+                                ST
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-nationality">
+                            Nationality
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="student-nationality"
+                            value="Indian"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-blood-group">
+                            Blood Group
+                        </label>
+
+                        <select
+                            id="student-blood-group"
+                        >
+
+                            <option value="">
+                                Select blood group
+                            </option>
+
+                            <option value="A+">
+                                A+
+                            </option>
+
+                            <option value="A-">
+                                A-
+                            </option>
+
+                            <option value="B+">
+                                B+
+                            </option>
+
+                            <option value="B-">
+                                B-
+                            </option>
+
+                            <option value="AB+">
+                                AB+
+                            </option>
+
+                            <option value="AB-">
+                                AB-
+                            </option>
+
+                            <option value="O+">
+                                O+
+                            </option>
+
+                            <option value="O-">
+                                O-
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-photo">
+                            Photo URL
+                        </label>
+
+                        <input
+                            type="url"
+                            id="student-photo"
+                            placeholder="Optional photo URL"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 PARENT INFORMATION
+            ====================================== -->
+
+            <section class="form-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Parent / Guardian Information
+                    </h2>
+
+                    <p>
+                        Enter parent or guardian details.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="mother-name">
+                            Mother's Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="mother-name"
+                            required
+                            maxlength="150"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="father-name">
+                            Father's Name
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="father-name"
+                            required
+                            maxlength="150"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="guardian-name">
+                            Guardian's Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="guardian-name"
+                            maxlength="150"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 CONTACT INFORMATION
+            ====================================== -->
+
+            <section class="form-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Contact Information
+                    </h2>
+
+                    <p>
+                        Provide contact details for communication.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="mobile-number">
+                            Mobile Number
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="mobile-number"
+                            required
+                            maxlength="10"
+                            inputmode="numeric"
+                            placeholder="10-digit mobile number"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="alternate-mobile-number">
+                            Alternate Mobile Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="alternate-mobile-number"
+                            maxlength="10"
+                            inputmode="numeric"
+                            placeholder="Optional"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="student-email"
+                            placeholder="example@email.com"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="student-pincode">
+                            Pincode
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="student-pincode"
+                            required
+                            maxlength="6"
+                            inputmode="numeric"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full-width">
+
+                        <label for="student-address">
+                            Address
+                            <span>*</span>
+                        </label>
+
+                        <textarea
+                            id="student-address"
+                            required
+                            rows="4"
+                            maxlength="500"
+                            placeholder="Enter complete residential address"
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 ADMISSION INFORMATION
+            ====================================== -->
+
+            <section class="form-section">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Admission Information
+                    </h2>
+
+                    <p>
+                        Select the academic year and class
+                        for which you are applying.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label for="academic-year">
+                            Academic Year
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="academic-year"
+                            required
+                        >
+
+                            <option value="">
+                                Loading academic years...
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="class">
+                            Applying Class
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="class"
+                            required
+                        >
+
+                            <option value="">
+                                Loading classes...
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="preferred-section">
+                            Preferred Section
+                        </label>
+
+                        <select
+                            id="preferred-section"
+                        >
+
+                            <option value="">
+                                Select class first
+                            </option>
+
+                        </select>
+
+                        <small>
+                            Section preference is subject
+                            to availability.
+                        </small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="previous-school">
+                            Previous School
+                        </label>
+
+                        <input
+                            type="text"
+                            id="previous-school"
+                            maxlength="250"
+                            placeholder="If applicable"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================
+                 DECLARATION
+            ====================================== -->
+
+            <section class="declaration">
+
+                <label class="checkbox-label">
+
+                    <input
+                        type="checkbox"
+                        id="declaration"
+                        required
+                    >
+
+                    <span>
+                        I confirm that the information
+                        provided in this application is
+                        true and complete to the best of
+                        my knowledge.
+                    </span>
+
+                </label>
+
+            </section>
+
+
+            <!-- =====================================
+                 MESSAGE
+            ====================================== -->
+
+            <div
+                id="application-message"
+                class="application-message"
+                aria-live="polite"
+            ></div>
+
+
+            <!-- =====================================
+                 ACTIONS
+            ====================================== -->
+
+            <div class="form-actions">
+
+                <button
+                    type="reset"
+                    class="secondary-button"
+                    id="reset-button"
+                >
+                    Clear Form
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="primary-button"
+                    id="submit-application"
+                >
+                    Submit Application
+                </button>
+
+            </div>
+
+
+        </form>
+
+
+        <!-- =========================================
+             SUCCESS SCREEN
+        ========================================== -->
+
+        <section
+            id="success-screen"
+            class="success-screen"
+            hidden
+        >
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+            <h2>
+                Application Submitted Successfully
+            </h2>
+
+            <p>
+                Your admission application has been
+                submitted for review.
+            </p>
+
+            <div class="application-number-box">
+
+                <span>
+                    Application Number
+                </span>
+
+                <strong
+                    id="application-number"
+                >
+                    -
+                </strong>
+
+            </div>
+
+            <p class="success-note">
+                Please keep this application number
+                for future reference.
+            </p>
+
+            <button
+                type="button"
+                class="primary-button"
+                id="new-application"
+            >
+                Submit Another Application
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="js/parent-admission.js"
+    ></script>
+
+</body>
+
+</html>

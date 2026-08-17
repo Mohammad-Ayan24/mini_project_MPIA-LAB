@@ -1,716 +1,1428 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>School Management Portal</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <link rel="stylesheet" href="css/styles.css">
+
 </head>
+
 
 <body>
 
-<div class="app">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-
-    <div class="logo">
-      <div class="logo-icon">🏫</div>
-      <div>
-        <h2>School Portal</h2>
-        <span>Management System</span>
-      </div>
-    </div>
-
-    <div class="menu-title">Main</div>
-
-    <div class="nav-item active" data-page="dashboard">
-      📊 <span>Dashboard</span>
-    </div>
-
-    <div class="nav-item" data-page="students">
-      👨‍🎓 <span>Students</span>
-    </div>
-
-    <div class="nav-item" data-page="admissions">
-      📝 <span>Admissions</span>
-    </div>
-
-    <div class="nav-item" data-page="certificates">
-      📜 <span>Certificates</span>
-    </div>
-
-    <div class="menu-title">Management</div>
-
-    <div class="nav-item" data-page="comparison">
-      📊 <span>UDISE Comparison</span>
-    </div>
-
-    <div class="nav-item" data-page="promotion">
-      🔄 <span>Promotion</span>
-    </div>
-
-    <div class="nav-item">
-      🏫 <span>Classes & Sections</span>
-    </div>
-
-    <div class="nav-item">
-      📑 <span>Reports</span>
-    </div>
-
-    <div class="menu-title">System</div>
-
-    <div class="nav-item">
-      👤 <span>Users</span>
-    </div>
-
-    <div class="nav-item">
-      ⚙️ <span>Settings</span>
-    </div>
-
-  </aside>
+  <div class="app">
 
 
-  <!-- MAIN -->
-  <main class="main">
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
 
-    <!-- TOPBAR -->
-    <header class="topbar">
+    <aside class="sidebar">
 
-      <input
-        class="search"
-        type="text"
-        placeholder="Search students, admissions..."
-      >
 
-      <div class="user">
+      <div class="logo">
+
+        <div class="logo-icon">
+          🏫
+        </div>
+
         <div>
-          <strong>Admin</strong>
-          <small class="user-role">Administrator</small>
+
+          <h2>School Portal</h2>
+
+          <span>
+            Management System
+          </span>
+
         </div>
 
-        <div class="avatar">A</div>
       </div>
 
-    </header>
+
+      <!-- MAIN -->
+
+      <div class="menu-title">
+        Main
+      </div>
 
 
-    <div class="content">
+      <div class="nav-item active" data-page="dashboard">
+        📊
+        <span>Dashboard</span>
+      </div>
 
-      <!-- DASHBOARD -->
-      <section id="dashboard" class="page-section active">
 
-        <div class="page-header">
+      <div class="nav-item" data-page="students">
+        👨‍🎓
+        <span>Students</span>
+      </div>
+
+
+      <div class="nav-item" data-page="admissions">
+        📝
+        <span>Admissions</span>
+      </div>
+
+
+      <div class="nav-item" data-page="certificates">
+        📜
+        <span>Certificates</span>
+      </div>
+
+
+      <!-- MANAGEMENT -->
+
+      <div class="menu-title">
+        Management
+      </div>
+
+
+      <div class="nav-item" data-page="comparison">
+        📊
+        <span>UDISE+ Comparison</span>
+      </div>
+
+
+      <div class="nav-item" data-page="promotion">
+        🔄
+        <span>Promotion</span>
+      </div>
+
+
+      <div class="nav-item">
+        🏫
+        <span>Classes & Sections</span>
+      </div>
+
+
+      <div class="nav-item">
+        📑
+        <span>Reports</span>
+      </div>
+
+
+      <!-- SYSTEM -->
+
+      <div class="menu-title" data-admin-only="true">
+        System
+      </div>
+
+
+      <div class="nav-item" data-admin-only="true">
+        👤
+        <span>Users</span>
+      </div>
+
+
+      <div class="nav-item" data-admin-only="true">
+        ⚙️
+        <span>Settings</span>
+      </div>
+
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+    <main class="main">
+
+
+      <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+      <header class="topbar">
+
+
+        <input class="search" type="text" placeholder="Search students, admissions...">
+
+
+        <div class="user">
+
           <div>
-            <h1>Dashboard</h1>
-            <p>Welcome back! Here's what's happening in your school.</p>
+
+            <strong>
+              Admin
+            </strong>
+
+            <small class="user-role">
+              Administrator
+            </small>
+
           </div>
 
-          <button class="btn">+ Add Student</button>
-        </div>
 
-
-        <!-- CARDS -->
-        <div class="cards">
-
-          <div class="card">
-            <div class="card-top">
-              <div class="card-icon blue">👨‍🎓</div>
-              <span class="change">+8.2%</span>
-            </div>
-            <h3>842</h3>
-            <p>Total Students</p>
-          </div>
-
-          <div class="card">
-            <div class="card-top">
-              <div class="card-icon green">📝</div>
-              <span class="change">+12%</span>
-            </div>
-            <h3>36</h3>
-            <p>New Admissions</p>
-          </div>
-
-          <div class="card">
-            <div class="card-top">
-              <div class="card-icon orange">⏳</div>
-              <span>Current</span>
-            </div>
-            <h3>18</h3>
-            <p>Pending Applications</p>
-          </div>
-
-          <div class="card">
-            <div class="card-top">
-              <div class="card-icon purple">📜</div>
-              <span class="change">+24%</span>
-            </div>
-            <h3>126</h3>
-            <p>Certificates Generated</p>
+          <div class="avatar">
+            A
           </div>
 
         </div>
 
 
-        <div class="dashboard-grid">
+      </header>
 
-          <!-- STUDENTS TABLE -->
-          <div class="panel">
+
+
+      <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+      <div class="content">
+
+
+        <!-- =================================================
+                 DASHBOARD
+            ================================================== -->
+
+        <section id="dashboard" class="page-section active">
+
+
+          <div class="page-header">
+
+            <div>
+
+              <h1>
+                Dashboard
+              </h1>
+
+              <p>
+                Welcome back! Here's what's happening in your school.
+              </p>
+
+            </div>
+
+
+            <button class="btn">
+              + Add Student
+            </button>
+
+          </div>
+
+
+
+          <!-- DASHBOARD CARDS -->
+
+          <div class="cards">
+
+
+            <div class="card">
+
+              <div class="card-top">
+
+                <div class="card-icon blue">
+                  👨‍🎓
+                </div>
+
+                <span class="change">
+                  +8.2%
+                </span>
+
+              </div>
+
+              <h3>
+                842
+              </h3>
+
+              <p>
+                Total Students
+              </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+              <div class="card-top">
+
+                <div class="card-icon green">
+                  📝
+                </div>
+
+                <span class="change">
+                  +12%
+                </span>
+
+              </div>
+
+              <h3>
+                36
+              </h3>
+
+              <p>
+                New Admissions
+              </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+              <div class="card-top">
+
+                <div class="card-icon orange">
+                  ⏳
+                </div>
+
+                <span>
+                  Current
+                </span>
+
+              </div>
+
+              <h3>
+                18
+              </h3>
+
+              <p>
+                Pending Applications
+              </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+              <div class="card-top">
+
+                <div class="card-icon purple">
+                  📜
+                </div>
+
+                <span class="change">
+                  +24%
+                </span>
+
+              </div>
+
+              <h3>
+                126
+              </h3>
+
+              <p>
+                Certificates Generated
+              </p>
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- DASHBOARD GRID -->
+
+          <div class="dashboard-grid">
+
+
+            <!-- RECENT STUDENTS -->
+
+            <div class="panel">
+
+
+              <div class="panel-header">
+
+                <h2>
+                  Recent Students
+                </h2>
+
+                <span class="view-all">
+                  View All →
+                </span>
+
+              </div>
+
+
+              <table>
+
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Student
+                    </th>
+
+                    <th>
+                      Admission No.
+                    </th>
+
+                    <th>
+                      Class
+                    </th>
+
+                    <th>
+                      Status
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                  <tr>
+
+                    <td>
+                      No students yet
+                    </td>
+
+                    <td>
+                      -
+                    </td>
+
+                    <td>
+                      -
+                    </td>
+
+                    <td>
+                      -
+                    </td>
+
+                  </tr>
+
+                </tbody>
+
+
+              </table>
+
+
+            </div>
+
+
+
+            <!-- CLASS STATISTICS -->
+
+            <div class="panel">
+
+
+              <div class="panel-header">
+
+                <h2>
+                  Class Statistics
+                </h2>
+
+              </div>
+
+
+              <div class="stat-row">
+
+                <div class="stat-label">
+
+                  <span>
+                    Class 1
+                  </span>
+
+                  <strong>
+                    0
+                  </strong>
+
+                </div>
+
+                <div class="progress">
+
+                  <div class="progress-bar progress-75"></div>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="stat-row">
+
+                <div class="stat-label">
+
+                  <span>
+                    Class 2
+                  </span>
+
+                  <strong>
+                    0
+                  </strong>
+
+                </div>
+
+                <div class="progress">
+
+                  <div class="progress-bar progress-85"></div>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="stat-row">
+
+                <div class="stat-label">
+
+                  <span>
+                    Class 3
+                  </span>
+
+                  <strong>
+                    0
+                  </strong>
+
+                </div>
+
+                <div class="progress">
+
+                  <div class="progress-bar progress-78"></div>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="stat-row">
+
+                <div class="stat-label">
+
+                  <span>
+                    Class 4
+                  </span>
+
+                  <strong>
+                    0
+                  </strong>
+
+                </div>
+
+                <div class="progress">
+
+                  <div class="progress-bar progress-92"></div>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="stat-row">
+
+                <div class="stat-label">
+
+                  <span>
+                    Class 5
+                  </span>
+
+                  <strong>
+                    0
+                  </strong>
+
+                </div>
+
+                <div class="progress">
+
+                  <div class="progress-bar progress-84"></div>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- QUICK ACTIONS -->
+
+          <div class="panel quick-actions-panel">
+
 
             <div class="panel-header">
-              <h2>Recent Students</h2>
-              <span class="view-all">View All →</span>
+
+              <h2>
+                Quick Actions
+              </h2>
+
             </div>
+
+
+            <div class="quick-actions">
+
+
+              <div class="quick-action">
+
+                <div>
+                  👨‍🎓
+                </div>
+
+                Add Student
+
+              </div>
+
+
+
+              <div class="quick-action">
+
+                <div>
+                  📝
+                </div>
+
+                Review Admissions
+
+              </div>
+
+
+
+              <div class="quick-action">
+
+                <div>
+                  📜
+                </div>
+
+                Generate Certificate
+
+              </div>
+
+
+
+              <div class="quick-action">
+
+                <div>
+                  📊
+                </div>
+
+                Compare Excel Data
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+                 STUDENTS
+            ================================================== -->
+
+        <section id="students" class="page-section">
+
+
+          <div class="page-header">
+
+
+            <div>
+
+              <h1>
+                Students
+              </h1>
+
+              <p>
+                Manage all student records.
+              </p>
+
+            </div>
+
+
+            <button class="btn">
+              + Add Student
+            </button>
+
+
+          </div>
+
+
+
+          <div class="section-card">
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+
+              <input type="text" placeholder="Search student...">
+
+
+              <select>
+
+                <option>
+                  All Classes
+                </option>
+
+                <option>
+                  Class 1
+                </option>
+
+                <option>
+                  Class 2
+                </option>
+
+                <option>
+                  Class 3
+                </option>
+
+                <option>
+                  Class 4
+                </option>
+
+                <option>
+                  Class 5
+                </option>
+
+                <option>
+                  Class 6
+                </option>
+
+                <option>
+                  Class 7
+                </option>
+
+                <option>
+                  Class 8
+                </option>
+
+                <option>
+                  Class 9
+                </option>
+
+                <option>
+                  Class 10
+                </option>
+
+                <option>
+                  Class 11
+                </option>
+
+                <option>
+                  Class 12
+                </option>
+
+              </select>
+
+
+              <select>
+
+                <option>
+                  All Sections
+                </option>
+
+                <option>
+                  A
+                </option>
+
+                <option>
+                  B
+                </option>
+
+                <option>
+                  C
+                </option>
+
+              </select>
+
+
+              <button class="btn">
+                Filter
+              </button>
+
+
+            </div>
+
+
+
+            <!-- DATABASE-DRIVEN STUDENT TABLE -->
 
             <table>
 
+
               <thead>
+
                 <tr>
-                  <th>Student</th>
-                  <th>Admission No.</th>
-                  <th>Class</th>
-                  <th>Status</th>
+
+                  <th>
+                    Student
+                  </th>
+
+                  <th>
+                    Admission No.
+                  </th>
+
+                  <th>
+                    DOB
+                  </th>
+
+                  <th>
+                    Gender
+                  </th>
+
+                  <th>
+                    Class
+                  </th>
+
+                  <th>
+                    Parent Contact
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
                 </tr>
+
               </thead>
+
+
+              <tbody id="students-table-body">
+
+
+                <!--
+                                Student records are NOT hardcoded here.
+
+                                app.js will load them from Supabase.
+                            -->
+
+
+                <tr>
+
+                  <td colspan="7">
+                    Loading students...
+                  </td>
+
+                </tr>
+
+
+              </tbody>
+
+
+            </table>
+
+
+          </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+                 ADMISSIONS
+            ================================================== -->
+
+        <section id="admissions" class="page-section">
+
+
+          <div class="page-header">
+
+
+            <div>
+
+              <h1>
+                Online Admissions
+              </h1>
+
+              <p>
+                Review and manage admission applications.
+              </p>
+
+            </div>
+
+
+            <button class="btn">
+              + New Application
+            </button>
+
+
+          </div>
+
+
+
+          <div class="section-card">
+
+
+            <div class="filters">
+
+
+              <input type="text" placeholder="Search application...">
+
+
+              <select>
+
+                <option>
+                  All Status
+                </option>
+
+                <option>
+                  Submitted
+                </option>
+
+                <option>
+                  Under Review
+                </option>
+
+                <option>
+                  Approved
+                </option>
+
+                <option>
+                  Rejected
+                </option>
+
+              </select>
+
+
+            </div>
+
+
+
+            <table>
+
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Application No.
+                  </th>
+
+                  <th>
+                    Student
+                  </th>
+
+                  <th>
+                    Applying Class
+                  </th>
+
+                  <th>
+                    Parent
+                  </th>
+
+                  <th>
+                    Date
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                </tr>
+
+              </thead>
+
 
               <tbody>
 
                 <tr>
-                  <td>
-                    <div class="student">
-                      <div class="student-img">RK</div>
-                      Rahul Kumar
-                    </div>
-                  </td>
-                  <td>ADM-2026-001</td>
-                  <td>8-A</td>
-                  <td>
-                    <span class="badge green-badge">Active</span>
-                  </td>
-                </tr>
 
-                <tr>
-                  <td>
-                    <div class="student">
-                      <div class="student-img">PS</div>
-                      Priya Sharma
-                    </div>
+                  <td colspan="6">
+                    No applications yet
                   </td>
-                  <td>ADM-2026-002</td>
-                  <td>7-B</td>
-                  <td>
-                    <span class="badge green-badge">Active</span>
-                  </td>
-                </tr>
 
-                <tr>
-                  <td>
-                    <div class="student">
-                      <div class="student-img">AS</div>
-                      Aman Singh
-                    </div>
-                  </td>
-                  <td>ADM-2026-003</td>
-                  <td>6-A</td>
-                  <td>
-                    <span class="badge yellow-badge">Pending</span>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td>
-                    <div class="student">
-                      <div class="student-img">NP</div>
-                      Neha Patel
-                    </div>
-                  </td>
-                  <td>ADM-2026-004</td>
-                  <td>5-C</td>
-                  <td>
-                    <span class="badge green-badge">Active</span>
-                  </td>
                 </tr>
 
               </tbody>
 
+
             </table>
 
+
           </div>
 
 
-          <!-- CLASS STATISTICS -->
-          <div class="panel">
+        </section>
 
-            <div class="panel-header">
-              <h2>Class Statistics</h2>
+
+
+        <!-- =================================================
+                 CERTIFICATES
+            ================================================== -->
+
+        <section id="certificates" class="page-section">
+
+
+          <div class="page-header">
+
+
+            <div>
+
+              <h1>
+                Certificate Generation
+              </h1>
+
+              <p>
+                Generate certificates directly from student records.
+              </p>
+
             </div>
 
-            <div class="stat-row">
-              <div class="stat-label">
-                <span>Class 1</span>
-                <strong>82</strong>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-75"></div>
-              </div>
+
+            <button class="btn">
+              + Generate Certificate
+            </button>
+
+
+          </div>
+
+
+
+          <div class="section-card">
+
+
+            <div class="filters">
+
+
+              <input type="text" placeholder="Search student...">
+
+
+              <select>
+
+                <option>
+                  Select Certificate Type
+                </option>
+
+                <option>
+                  Transfer Certificate
+                </option>
+
+                <option>
+                  Bonafide Certificate
+                </option>
+
+                <option>
+                  Character Certificate
+                </option>
+
+                <option>
+                  Study Certificate
+                </option>
+
+                <option>
+                  Fee Certificate
+                </option>
+
+              </select>
+
+
             </div>
 
-            <div class="stat-row">
-              <div class="stat-label">
-                <span>Class 2</span>
-                <strong>96</strong>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-85"></div>
-              </div>
+
+
+            <table>
+
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Certificate No.
+                  </th>
+
+                  <th>
+                    Student
+                  </th>
+
+                  <th>
+                    Type
+                  </th>
+
+                  <th>
+                    Generated Date
+                  </th>
+
+                  <th>
+                    Generated By
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr>
+
+                  <td colspan="6">
+                    No certificates yet
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+
+            </table>
+
+
+          </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+                 UDISE COMPARISON
+            ================================================== -->
+
+        <section id="comparison" class="page-section">
+
+
+          <div class="page-header">
+
+
+            <div>
+
+              <h1>
+                UDISE+ Comparison
+              </h1>
+
+              <p>
+                Compare school records with external Excel data.
+              </p>
+
             </div>
 
-            <div class="stat-row">
-              <div class="stat-label">
-                <span>Class 3</span>
-                <strong>88</strong>
+
+          </div>
+
+
+
+          <div class="section-card">
+
+
+            <h2>
+              Upload Excel Files
+            </h2>
+
+
+
+            <div class="upload-box">
+
+
+              <div class="icon">
+                📊
               </div>
-              <div class="progress">
-                <div class="progress-bar progress-78"></div>
+
+
+              <h3>
+                Upload School Excel File
+              </h3>
+
+
+              <p class="upload-description">
+                Upload student records (.xlsx / .xls)
+              </p>
+
+
+              <input type="file" accept=".xlsx,.xls">
+
+
+            </div>
+
+
+
+            <div class="upload-box">
+
+
+              <div class="icon">
+                📁
               </div>
+
+
+              <h3>
+                Upload UDISE / UDSE Excel File
+              </h3>
+
+
+              <p class="upload-description">
+                Upload external student records
+              </p>
+
+
+              <input type="file" accept=".xlsx,.xls">
+
+
             </div>
 
-            <div class="stat-row">
-              <div class="stat-label">
-                <span>Class 4</span>
-                <strong>102</strong>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-92"></div>
-              </div>
+
+
+            <button class="btn">
+              🔍 Compare Files
+            </button>
+
+
+          </div>
+
+
+
+          <div class="cards">
+
+
+            <div class="card">
+
+              <h3>
+                0
+              </h3>
+
+              <p>
+                Matched Records
+              </p>
+
             </div>
 
-            <div class="stat-row">
-              <div class="stat-label">
-                <span>Class 5</span>
-                <strong>95</strong>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-84"></div>
-              </div>
+
+
+            <div class="card">
+
+              <h3 class="stat-danger">
+                0
+              </h3>
+
+              <p>
+                Missing Records
+              </p>
+
             </div>
 
-          </div>
-
-        </div>
 
 
-        <!-- QUICK ACTIONS -->
-        <div class="panel quick-actions-panel">
+            <div class="card">
 
-          <div class="panel-header">
-            <h2>Quick Actions</h2>
-          </div>
+              <h3 class="stat-warning">
+                0
+              </h3>
 
-          <div class="quick-actions">
+              <p>
+                Data Mismatches
+              </p>
 
-            <div class="quick-action">
-              <div>👨‍🎓</div>
-              Add Student
             </div>
 
-            <div class="quick-action">
-              <div>📝</div>
-              Review Admissions
+
+
+            <div class="card">
+
+              <h3 class="stat-purple">
+                0
+              </h3>
+
+              <p>
+                Duplicate Records
+              </p>
+
             </div>
 
-            <div class="quick-action">
-              <div>📜</div>
-              Generate Certificate
+
+          </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+                 PROMOTION
+            ================================================== -->
+
+        <section id="promotion" class="page-section">
+
+
+          <div class="page-header">
+
+
+            <div>
+
+              <h1>
+                Student Promotion
+              </h1>
+
+              <p>
+                Promote students to the next academic class.
+              </p>
+
             </div>
 
-            <div class="quick-action">
-              <div>📊</div>
-              Compare Excel Data
+
+            <button class="btn">
+              Promote Selected
+            </button>
+
+
+          </div>
+
+
+
+          <div class="section-card">
+
+
+            <div class="filters">
+
+
+              <select>
+
+                <option>
+                  Current Class
+                </option>
+
+                <option>
+                  Class 5
+                </option>
+
+                <option>
+                  Class 6
+                </option>
+
+                <option>
+                  Class 7
+                </option>
+
+              </select>
+
+
+
+              <select>
+
+                <option>
+                  Current Section
+                </option>
+
+                <option>
+                  A
+                </option>
+
+                <option>
+                  B
+                </option>
+
+                <option>
+                  C
+                </option>
+
+              </select>
+
+
+
+              <select>
+
+                <option>
+                  Promote To
+                </option>
+
+                <option>
+                  Class 6
+                </option>
+
+                <option>
+                  Class 7
+                </option>
+
+                <option>
+                  Class 8
+                </option>
+
+              </select>
+
+
             </div>
 
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- STUDENTS -->
-      <section id="students" class="page-section">
-
-        <div class="page-header">
-          <div>
-            <h1>Students</h1>
-            <p>Manage all student records.</p>
-          </div>
-
-          <button class="btn">+ Add Student</button>
-        </div>
-
-        <div class="section-card">
-
-          <div class="filters">
-            <input type="text" placeholder="Search student...">
-
-            <select>
-              <option>All Classes</option>
-              <option>Class 1</option>
-              <option>Class 2</option>
-              <option>Class 3</option>
-              <option>Class 4</option>
-              <option>Class 5</option>
-            </select>
-
-            <select>
-              <option>All Sections</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-            </select>
-
-            <button class="btn">Filter</button>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Student</th>
-                <th>Admission No.</th>
-                <th>DOB</th>
-                <th>Gender</th>
-                <th>Class</th>
-                <th>Parent Contact</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>Rahul Kumar</td>
-                <td>ADM-2026-001</td>
-                <td>12/04/2014</td>
-                <td>Male</td>
-                <td>8-A</td>
-                <td>9876543210</td>
-                <td><span class="badge green-badge">Active</span></td>
-              </tr>
-
-              <tr>
-                <td>Priya Sharma</td>
-                <td>ADM-2026-002</td>
-                <td>18/08/2015</td>
-                <td>Female</td>
-                <td>7-B</td>
-                <td>9876543211</td>
-                <td><span class="badge green-badge">Active</span></td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
-      </section>
-
-
-      <!-- ADMISSIONS -->
-      <section id="admissions" class="page-section">
-
-        <div class="page-header">
-          <div>
-            <h1>Online Admissions</h1>
-            <p>Review and manage admission applications.</p>
-          </div>
-
-          <button class="btn">+ New Application</button>
-        </div>
-
-        <div class="section-card">
-
-          <div class="filters">
-            <input type="text" placeholder="Search application...">
-
-            <select>
-              <option>All Status</option>
-              <option>Submitted</option>
-              <option>Under Review</option>
-              <option>Approved</option>
-              <option>Rejected</option>
-            </select>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Application No.</th>
-                <th>Student</th>
-                <th>Applying Class</th>
-                <th>Parent</th>
-                <th>Date</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>APP-2026-001</td>
-                <td>Arjun Verma</td>
-                <td>Class 6</td>
-                <td>Rajesh Verma</td>
-                <td>10 Aug 2026</td>
-                <td>
-                  <span class="badge yellow-badge">Under Review</span>
-                </td>
-              </tr>
-
-              <tr>
-                <td>APP-2026-002</td>
-                <td>Ananya Singh</td>
-                <td>Class 4</td>
-                <td>Vijay Singh</td>
-                <td>09 Aug 2026</td>
-                <td>
-                  <span class="badge green-badge">Approved</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
-      </section>
-
-
-      <!-- CERTIFICATES -->
-      <section id="certificates" class="page-section">
-
-        <div class="page-header">
-          <div>
-            <h1>Certificate Generation</h1>
-            <p>Generate certificates directly from student records.</p>
-          </div>
-
-          <button class="btn">+ Generate Certificate</button>
-        </div>
-
-        <div class="section-card">
-
-          <div class="filters">
-            <input type="text" placeholder="Search student...">
-
-            <select>
-              <option>Select Certificate Type</option>
-              <option>Transfer Certificate</option>
-              <option>Bonafide Certificate</option>
-              <option>Character Certificate</option>
-              <option>Study Certificate</option>
-              <option>Fee Certificate</option>
-            </select>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Certificate No.</th>
-                <th>Student</th>
-                <th>Type</th>
-                <th>Generated Date</th>
-                <th>Generated By</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>CERT-2026-001</td>
-                <td>Rahul Kumar</td>
-                <td>Bonafide Certificate</td>
-                <td>10 Aug 2026</td>
-                <td>Admin</td>
-                <td>
-                  <button class="btn">Download PDF</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-        </div>
-
-      </section>
-
-
-      <!-- UDISE COMPARISON -->
-      <section id="comparison" class="page-section">
-
-        <div class="page-header">
-          <div>
-            <h1>UDISE / UDSE Comparison</h1>
-            <p>Compare school records with external Excel data.</p>
-          </div>
-        </div>
-
-        <div class="section-card">
-
-          <h2>Upload Excel Files</h2>
-
-          <div class="upload-box">
-            <div class="icon">📊</div>
-
-            <h3>Upload School Excel File</h3>
-
-            <p class="upload-description">
-              Upload student records (.xlsx / .xls)
-            </p>
-
-            <input type="file" accept=".xlsx,.xls">
-          </div>
-
-          <div class="upload-box">
-            <div class="icon">📁</div>
-
-            <h3>Upload UDISE / UDSE Excel File</h3>
-
-            <p class="upload-description">
-              Upload external student records
-            </p>
-
-            <input type="file" accept=".xlsx,.xls">
-          </div>
-
-          <button class="btn">
-            🔍 Compare Files
-          </button>
-
-        </div>
-
-
-        <div class="cards quick-actions-panel">
-
-          <div class="card">
-            <h3>810</h3>
-            <p>Matched Records</p>
-          </div>
-
-          <div class="card">
-            <h3 class="stat-danger">18</h3>
-            <p>Missing Records</p>
-          </div>
-
-          <div class="card">
-            <h3 class="stat-warning">12</h3>
-            <p>Data Mismatches</p>
-          </div>
-
-          <div class="card">
-            <h3 class="stat-purple">2</h3>
-            <p>Duplicate Records</p>
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- PROMOTION -->
-      <section id="promotion" class="page-section">
-
-        <div class="page-header">
-          <div>
-            <h1>Student Promotion</h1>
-            <p>Promote students to the next academic class.</p>
-          </div>
-
-          <button class="btn">Promote Selected</button>
-        </div>
-
-        <div class="section-card">
-
-          <div class="filters">
-
-            <select>
-              <option>Current Class</option>
-              <option>Class 5</option>
-              <option>Class 6</option>
-              <option>Class 7</option>
-            </select>
-
-            <select>
-              <option>Current Section</option>
-              <option>A</option>
-              <option>B</option>
-              <option>C</option>
-            </select>
-
-            <select>
-              <option>Promote To</option>
-              <option>Class 6</option>
-              <option>Class 7</option>
-              <option>Class 8</option>
-            </select>
+
+
+            <table>
+
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    <input type="checkbox">
+                  </th>
+
+                  <th>
+                    Student
+                  </th>
+
+                  <th>
+                    Current Class
+                  </th>
+
+                  <th>
+                    New Class
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr>
+
+                  <td colspan="5">
+                    No students available for promotion.
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+
+            </table>
+
 
           </div>
 
-          <table>
 
-            <thead>
-              <tr>
-                <th>
-                  <input type="checkbox">
-                </th>
-                <th>Student</th>
-                <th>Current Class</th>
-                <th>New Class</th>
-                <th>Status</th>
-              </tr>
-            </thead>
+        </section>
 
-            <tbody>
 
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Rahul Kumar</td>
-                <td>5-A</td>
-                <td>6-A</td>
-                <td>
-                  <span class="badge green-badge">Eligible</span>
-                </td>
-              </tr>
+      </div>
 
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Priya Sharma</td>
-                <td>5-A</td>
-                <td>6-A</td>
-                <td>
-                  <span class="badge green-badge">Eligible</span>
-                </td>
-              </tr>
 
-              <tr>
-                <td><input type="checkbox"></td>
-                <td>Aman Singh</td>
-                <td>5-A</td>
-                <td>6-A</td>
-                <td>
-                  <span class="badge yellow-badge">Review</span>
-                </td>
-              </tr>
+    </main>
 
-            </tbody>
 
-          </table>
+  </div>
 
-        </div>
 
-      </section>
 
-    </div>
+  <!-- =====================================================
+     APPLICATION JAVASCRIPT
+====================================================== -->
 
-  </main>
+  <script type="module" src="js/app.js"></script>
 
-</div>
-
-<script src="js/app.js"></script>
 
 </body>
+
 </html>
