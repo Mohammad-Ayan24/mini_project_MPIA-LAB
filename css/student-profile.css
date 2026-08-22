@@ -1,0 +1,762 @@
+/* =========================================
+   PAGE
+========================================= */
+
+.student-profile-page {
+
+    min-height: 100vh;
+
+    background: #f8fafc;
+
+    padding: 30px;
+
+}
+
+
+.student-profile-container {
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.student-profile-topbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 24px;
+
+}
+
+
+.back-button {
+
+    border: 1px solid #d1d5db;
+
+    background: #ffffff;
+
+    color: #374151;
+
+    padding: 9px 16px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+}
+
+
+.back-button:hover {
+
+    background: #f3f4f6;
+
+}
+
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.student-profile-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 30px
+        rgba(
+            0,
+            0,
+            0,
+            0.06
+        );
+
+}
+
+
+/* =========================================
+   PROFILE HEADER
+========================================= */
+
+.student-profile-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 28px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+
+.student-profile-photo {
+
+    width: 90px;
+
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    color: #374151;
+
+    font-size: 32px;
+
+    font-weight: 600;
+
+}
+
+
+.student-profile-photo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.student-profile-name {
+
+    margin: 0 0 7px;
+
+    color: #111827;
+
+    font-size: 25px;
+
+    font-weight: 600;
+
+}
+
+
+.student-profile-admission {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+
+.student-profile-status {
+
+    margin-top: 10px;
+
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.student-profile-content {
+
+    padding: 30px;
+
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.profile-section {
+
+    margin-bottom: 32px;
+
+}
+
+
+.profile-section:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+.profile-section-title {
+
+    margin: 0 0 17px;
+
+    padding-bottom: 9px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    color: #111827;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+
+/* =========================================
+   FIELD GRID
+========================================= */
+
+.profile-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 18px 30px;
+
+}
+
+
+.profile-field {
+
+    min-width: 0;
+
+}
+
+
+.profile-field.full {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.profile-label {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.profile-value {
+
+    color: #111827;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    word-break: break-word;
+
+}
+
+
+/* =========================================
+   STATUS BADGES
+========================================= */
+
+.student-status {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+}
+
+
+.student-status.active {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.student-status.inactive {
+
+    background: #fef3c7;
+
+    color: #92400e;
+
+}
+
+
+/* =========================================
+   LOADING / ERROR
+========================================= */
+
+.loading-message {
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+
+.error-message {
+
+    padding: 80px 20px;
+
+    text-align: center;
+
+    color: #b91c1c;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .student-profile-page {
+
+        padding: 15px;
+
+    }
+
+
+    .student-profile-header {
+
+        padding: 20px;
+
+        align-items: flex-start;
+
+    }
+
+
+    .student-profile-content {
+
+        padding: 20px;
+
+    }
+
+
+    .student-profile-photo {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 25px;
+
+    }
+
+
+    .student-profile-name {
+
+        font-size: 20px;
+
+    }
+
+
+    .profile-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .profile-field.full {
+
+        grid-column: auto;
+
+    }
+
+}
+
+/* =========================================
+   EDIT STUDENT BUTTON
+========================================= */
+
+.edit-student-button {
+
+    border: 1px solid #2563eb;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    padding: 9px 16px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+}
+
+
+.edit-student-button:hover {
+
+    background: #1d4ed8;
+
+}
+
+/* =========================================
+   EDIT STUDENT
+========================================= */
+
+.student-edit-header {
+
+    padding: 28px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+
+.student-edit-title {
+
+    margin: 0 0 6px;
+
+    color: #111827;
+
+    font-size: 24px;
+
+}
+
+
+.student-edit-subtitle {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+
+.student-edit-form {
+
+    padding: 30px;
+
+}
+
+
+.edit-section {
+
+    margin-bottom: 32px;
+
+}
+
+
+.edit-section-title {
+
+    margin: 0 0 18px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+    color: #111827;
+
+    font-size: 17px;
+
+}
+
+
+.edit-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 20px 30px;
+
+}
+
+
+.edit-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.edit-field.full {
+
+    grid-column: 1 / -1;
+
+}
+
+
+.edit-field label {
+
+    margin-bottom: 7px;
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+
+.edit-field label span {
+
+    color: #dc2626;
+
+}
+
+
+.edit-field input,
+.edit-field select,
+.edit-field textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    padding: 10px 12px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+}
+
+
+.edit-field input:focus,
+.edit-field select:focus,
+.edit-field textarea:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            37,
+            99,
+            235,
+            0.10
+        );
+
+}
+
+
+.edit-field input:disabled {
+
+    background: #f3f4f6;
+
+    color: #6b7280;
+
+    cursor: not-allowed;
+
+}
+
+
+.edit-field small {
+
+    margin-top: 5px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+
+}
+
+
+.edit-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 24px;
+
+    border-top:
+        1px solid #e5e7eb;
+
+}
+
+
+.cancel-edit-button,
+.save-student-button {
+
+    border: none;
+
+    border-radius: 7px;
+
+    padding: 10px 18px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.cancel-edit-button {
+
+    background: #f3f4f6;
+
+    color: #374151;
+
+}
+
+
+.cancel-edit-button:hover {
+
+    background: #e5e7eb;
+
+}
+
+
+.save-student-button {
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+}
+
+
+.save-student-button:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+.save-student-button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .student-edit-form {
+
+        padding: 20px;
+
+    }
+
+
+    .edit-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .edit-field.full {
+
+        grid-column: auto;
+
+    }
+
+
+    .edit-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+    }
+
+
+    .cancel-edit-button,
+    .save-student-button {
+
+        width: 100%;
+
+    }
+
+}
