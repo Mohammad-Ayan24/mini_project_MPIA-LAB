@@ -330,24 +330,295 @@ function setupForm() {
 
     admissionForm.addEventListener(
         "submit",
-        event => {
+        async event => {
 
             event.preventDefault();
 
             clearMessage();
 
 
-            /*
-             * Database insertion will be implemented
-             * after the admission form UI and dropdowns
-             * have been tested.
-             */
+            // =====================================
+            // VALIDATE FORM
+            // =====================================
+
+            if (!admissionForm.checkValidity()) {
+
+                admissionForm.reportValidity();
+
+                return;
+
+            }
 
 
-            showMessage(
-                "The admission form is ready. Student saving will be connected in the next step.",
-                "success"
-            );
+            // =====================================
+            // COLLECT FORM DATA
+            // =====================================
+
+            const formData =
+                new FormData(admissionForm);
+
+
+            const application = {
+
+                student_name:
+                    formData.get("student_name")?.trim(),
+
+                gender:
+                    formData.get("gender"),
+
+                date_of_birth:
+                    formData.get("date_of_birth"),
+
+                pen_number:
+                    formData.get("pen_number")?.trim(),
+
+                social_category:
+                    formData.get("social_category"),
+
+                nationality:
+                    formData.get("nationality")?.trim(),
+
+                blood_group:
+                    formData.get("blood_group"),
+
+                student_photo:
+                    formData.get("student_photo")?.trim(),
+
+                mother_name:
+                    formData.get("mother_name")?.trim(),
+
+                father_name:
+                    formData.get("father_name")?.trim(),
+
+                guardian_name:
+                    formData.get("guardian_name")?.trim(),
+
+                mobile_number:
+                    formData.get("mobile_number")?.trim(),
+
+                alternate_mobile_number:
+                    formData.get(
+                        "alternate_mobile_number"
+                    )?.trim(),
+
+                email:
+                    formData.get("email")?.trim(),
+
+                address:
+                    formData.get("address")?.trim(),
+
+                pincode:
+                    formData.get("pincode")?.trim(),
+
+                academic_year_id:
+                    formData.get("academic_year_id"),
+
+                class_id:
+                    formData.get("class_id"),
+
+                section_id:
+                    formData.get("section_id"),
+
+                previous_school_name:
+                    formData.get(
+                        "previous_school_name"
+                    )?.trim()
+
+            };
+
+
+            // =====================================
+            // EXTRA CLIENT-SIDE VALIDATION
+            // =====================================
+
+            if (
+                !application.academic_year_id
+            ) {
+
+                showMessage(
+                    "Please select an academic year."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !application.class_id
+            ) {
+
+                showMessage(
+                    "Please select a class."
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !application.section_id
+            ) {
+
+                showMessage(
+                    "Please select a section."
+                );
+
+                return;
+
+            }
+
+
+            // =====================================
+            // DISABLE BUTTON
+            // =====================================
+
+            saveButton.disabled = true;
+
+            saveButton.textContent =
+                "Saving...";
+
+
+            try {
+
+                // =================================
+                // CALL DATABASE FUNCTION
+                // =================================
+
+                const {
+                    data: admissionNumber,
+                    error
+                } = await supabase.rpc(
+                    "create_admin_student",
+                    {
+                        p_application:
+                            application
+                    }
+                );
+
+
+                if (error) {
+
+                    console.error(
+                        "Failed to create student:",
+                        error
+                    );
+
+                    throw error;
+
+                }
+
+
+                // =================================
+                // SUCCESS
+                // =================================
+
+                showMessage(
+                    `Student created successfully. Admission Number: ${admissionNumber}`,
+                    "success"
+                );
+
+
+                // =================================
+                // RESET FORM
+                // =================================
+
+                admissionForm.reset();
+
+
+                // Restore current academic year
+                await loadAcademicYears();
+
+
+                // Reset class dropdown
+                if (classSelect) {
+
+                    classSelect.value = "";
+
+                }
+
+
+                // Reset section dropdown
+                if (sectionSelect) {
+
+                    sectionSelect.innerHTML = `
+                        <option value="">
+                            Select class first
+                        </option>
+                    `;
+
+                }
+
+
+                console.log(
+                    "Student created:",
+                    admissionNumber
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Student creation failed:",
+                    error
+                );
+
+
+                let message =
+                    "Unable to create student.";
+
+
+                if (
+                    error?.message
+                ) {
+
+                    message =
+                        error.message;
+
+                }
+
+
+                // Handle common duplicate PEN error
+                if (
+                    message.includes(
+                        "students_pen_number_key"
+                    )
+                ) {
+
+                    message =
+                        "A student with this PEN number already exists.";
+
+                }
+
+
+                // Handle duplicate enrollment
+                if (
+                    message.includes(
+                        "student_enrollments_admission_number_academic_year_id_key"
+                    )
+                ) {
+
+                    message =
+                        "This student is already enrolled in the selected academic year.";
+
+                }
+
+
+                showMessage(
+                    message
+                );
+
+
+            } finally {
+
+                saveButton.disabled =
+                    false;
+
+                saveButton.textContent =
+                    "Save Student";
+
+            }
 
         }
     );
