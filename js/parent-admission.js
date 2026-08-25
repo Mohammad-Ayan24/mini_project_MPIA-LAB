@@ -1,5 +1,16 @@
 import { supabase } from "./supabase.js";
 
+// =====================================================
+// PAGE MODE
+// =====================================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const isStaffMode =
+    urlParams.get("source") === "staff";
 
 // =====================================================
 // ELEMENTS
@@ -402,6 +413,33 @@ function validateForm() {
         const field of requiredFields
     ) {
 
+        // =========================================
+        // REQUIRED CHECKBOX
+        // =========================================
+
+        if (
+            field.type === "checkbox"
+        ) {
+
+            if (!field.checked) {
+
+                showMessage(
+                    `Please complete the required field: ${getFieldLabel(field)}.`
+                );
+
+                field.focus();
+
+                return false;
+            }
+
+            continue;
+        }
+
+
+        // =========================================
+        // REQUIRED TEXT / SELECT / OTHER FIELDS
+        // =========================================
+
         if (
             !field.value ||
             !field.value.trim()
@@ -411,12 +449,9 @@ function validateForm() {
                 `Please complete the required field: ${getFieldLabel(field)}.`
             );
 
-
             field.focus();
 
-
             return false;
-
         }
 
     }
@@ -1059,6 +1094,195 @@ function setupEventListeners() {
 
 }
 
+// =====================================================
+// STAFF UI MODE
+// =====================================================
+
+function setupStaffMode() {
+
+    if (!isStaffMode) {
+        return;
+    }
+
+
+    // =========================================
+    // PAGE TITLE
+    // =========================================
+
+    const pageTitle =
+        document.querySelector(
+            ".admission-header h1"
+        );
+
+    if (pageTitle) {
+
+        pageTitle.textContent =
+            "New Admission Application";
+
+    }
+
+
+    // =========================================
+    // PAGE SUBTITLE
+    // =========================================
+
+    const pageSubtitle =
+        document.querySelector(
+            ".admission-header p"
+        );
+
+    if (pageSubtitle) {
+
+        pageSubtitle.textContent =
+            "Enter the student's details to create an admission application for administrative review.";
+
+    }
+
+
+    // =========================================
+    // SUBMIT BUTTON
+    // =========================================
+
+    if (submitButton) {
+
+        submitButton.textContent =
+            "Submit for Admin Review";
+
+    }
+
+
+    // =========================================
+    // STUDENT INFORMATION DESCRIPTION
+    // =========================================
+
+    const studentDescription =
+        document.querySelector(
+            ".form-section:nth-of-type(1) .section-heading p"
+        );
+
+    if (studentDescription) {
+
+        studentDescription.textContent =
+            "Enter the applicant's student details.";
+
+    }
+
+
+    // =========================================
+    // CONTACT DESCRIPTION
+    // =========================================
+
+    const formSections =
+        document.querySelectorAll(
+            ".form-section"
+        );
+
+    if (formSections.length >= 3) {
+
+        const contactDescription =
+            formSections[2]
+                .querySelector(
+                    ".section-heading p"
+                );
+
+        if (contactDescription) {
+
+            contactDescription.textContent =
+                "Provide the parent's or guardian's contact details.";
+
+        }
+
+    }
+
+
+    // =========================================
+    // STAFF NOTICE
+    // =========================================
+
+    const notice =
+        document.createElement(
+            "div"
+        );
+
+    notice.className =
+        "staff-application-notice";
+
+    notice.innerHTML = `
+        <strong>Staff Submission</strong>
+        <p>
+            This application will be sent to Admin
+            for review. The student will not be added
+            to the student database until the application
+            is approved.
+        </p>
+    `;
+
+
+    const form =
+        document.getElementById(
+            "parent-admission-form"
+        );
+
+    if (
+        form &&
+        form.parentNode
+    ) {
+
+        form.parentNode.insertBefore(
+            notice,
+            form
+        );
+
+    }
+
+}
+
+function setupSuccessScreenText() {
+
+    if (!isStaffMode) {
+        return;
+    }
+
+    const successTitle =
+        document.querySelector(
+            "#success-screen h2"
+        );
+
+    const successMessage =
+        document.querySelector(
+            "#success-screen > p"
+        );
+
+    const successNote =
+        document.querySelector(
+            ".success-note"
+        );
+
+
+    if (successTitle) {
+
+        successTitle.textContent =
+            "Application Submitted for Admin Review";
+
+    }
+
+
+    if (successMessage) {
+
+        successMessage.textContent =
+            "The admission application has been successfully submitted and is now pending Admin review.";
+
+    }
+
+
+    if (successNote) {
+
+        successNote.textContent =
+            "Keep this application number for future reference.";
+
+    }
+
+}
 
 // =====================================================
 // INITIALIZE
@@ -1070,22 +1294,22 @@ async function initializePage() {
         "Initializing parent admission page..."
     );
 
-
     try {
 
-        setupEventListeners();
+        setupStaffMode();
 
+        setupSuccessScreenText();
+
+        setupEventListeners();
 
         await Promise.all([
             loadAcademicYears(),
             loadClasses()
         ]);
 
-
         console.log(
             "Parent admission page ready."
         );
-
 
     } catch (error) {
 
@@ -1093,7 +1317,6 @@ async function initializePage() {
             "Parent admission initialization failed:",
             error
         );
-
 
         showMessage(
             "Unable to initialize the admission form."

@@ -362,3 +362,21 @@ body {
     }
 
 }
+
+.staff-application-notice {
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    border: 1px solid #c7d7fe;
+    border-radius: 10px;
+    background: #f5f8ff;
+}
+
+.staff-application-notice strong {
+    display: block;
+    margin-bottom: 6px;
+}
+
+.staff-application-notice p {
+    margin: 0;
+    line-height: 1.5;
+}

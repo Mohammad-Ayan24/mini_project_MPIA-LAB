@@ -1,6 +1,6 @@
 import {
-checkAuthSession,
-getCurrentProfile
+    checkAuthSession,
+    getCurrentProfile
 } from "./auth.js";
 
 import { supabase } from "./supabase.js";
@@ -27,40 +27,40 @@ let allStudents = [];
 
 function showPage(pageId, element) {
 
-document
-    .querySelectorAll(".page-section")
-    .forEach(page => {
+    document
+        .querySelectorAll(".page-section")
+        .forEach(page => {
 
-        page.classList.remove("active");
+            page.classList.remove("active");
 
-    });
-
-
-const selectedPage =
-    document.getElementById(pageId);
+        });
 
 
-if (selectedPage) {
-
-    selectedPage.classList.add("active");
-
-}
+    const selectedPage =
+        document.getElementById(pageId);
 
 
-document
-    .querySelectorAll(".nav-item")
-    .forEach(item => {
+    if (selectedPage) {
 
-        item.classList.remove("active");
+        selectedPage.classList.add("active");
 
-    });
+    }
 
 
-if (element) {
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(item => {
 
-    element.classList.add("active");
+            item.classList.remove("active");
 
-}
+        });
+
+
+    if (element) {
+
+        element.classList.add("active");
+
+    }
 
 }
 
@@ -70,40 +70,40 @@ if (element) {
 
 function setupSidebarNavigation() {
 
-const navItems =
-    document.querySelectorAll(
-        ".nav-item[data-page]"
-    );
+    const navItems =
+        document.querySelectorAll(
+            ".nav-item[data-page]"
+        );
 
 
-navItems.forEach(item => {
+    navItems.forEach(item => {
 
-    item.addEventListener(
-        "click",
-        async () => {
+        item.addEventListener(
+            "click",
+            async () => {
 
-            const pageId =
-                item.dataset.page;
-
-
-            showPage(
-                pageId,
-                item
-            );
+                const pageId =
+                    item.dataset.page;
 
 
-            if (
-                pageId === "admissions"
-            ) {
+                showPage(
+                    pageId,
+                    item
+                );
 
-                await loadAdmissionApplications();
+
+                if (
+                    pageId === "admissions"
+                ) {
+
+                    await loadAdmissionApplications();
+
+                }
 
             }
+        );
 
-        }
-    );
-
-});
+    });
 
 }
 
@@ -113,63 +113,63 @@ navItems.forEach(item => {
 
 function updateUserInterface() {
 
-if (!currentProfile) {
+    if (!currentProfile) {
 
-    return;
+        return;
 
-}
-
-
-const userName =
-    document.querySelector(
-        ".user strong"
-    );
+    }
 
 
-const userRole =
-    document.querySelector(
-        ".user small"
-    );
+    const userName =
+        document.querySelector(
+            ".user strong"
+        );
 
 
-const avatar =
-    document.querySelector(
-        ".avatar"
-    );
+    const userRole =
+        document.querySelector(
+            ".user small"
+        );
 
 
-if (userName) {
-
-    userName.textContent =
-        currentProfile.full_name ||
-        "User";
-
-}
+    const avatar =
+        document.querySelector(
+            ".avatar"
+        );
 
 
-if (userRole) {
+    if (userName) {
 
-    userRole.textContent =
-        currentProfile.role === "admin"
-            ? "Administrator"
-            : "Staff";
+        userName.textContent =
+            currentProfile.full_name ||
+            "User";
 
-}
-
-
-if (avatar) {
-
-    const name =
-        currentProfile.full_name ||
-        "User";
+    }
 
 
-    avatar.textContent =
-        name
-            .charAt(0)
-            .toUpperCase();
+    if (userRole) {
 
-}
+        userRole.textContent =
+            currentProfile.role === "admin"
+                ? "Administrator"
+                : "Staff";
+
+    }
+
+
+    if (avatar) {
+
+        const name =
+            currentProfile.full_name ||
+            "User";
+
+
+        avatar.textContent =
+            name
+                .charAt(0)
+                .toUpperCase();
+
+    }
 
 }
 
@@ -179,35 +179,35 @@ if (avatar) {
 
 function updateRoleBasedUI() {
 
-if (!currentProfile) {
+    if (!currentProfile) {
 
-    return;
-
-}
-
-
-const adminOnlyItems =
-    document.querySelectorAll(
-        '[data-admin-only="true"]'
-    );
-
-
-adminOnlyItems.forEach(item => {
-
-    if (
-        currentProfile.role ===
-        "admin"
-    ) {
-
-        item.style.display = "";
-
-    } else {
-
-        item.style.display = "none";
+        return;
 
     }
 
-});
+
+    const adminOnlyItems =
+        document.querySelectorAll(
+            '[data-admin-only="true"]'
+        );
+
+
+    adminOnlyItems.forEach(item => {
+
+        if (
+            currentProfile.role ===
+            "admin"
+        ) {
+
+            item.style.display = "";
+
+        } else {
+
+            item.style.display = "none";
+
+        }
+
+    });
 
 }
 
@@ -217,86 +217,86 @@ adminOnlyItems.forEach(item => {
 
 function createLogoutButton() {
 
-const userContainer =
-    document.querySelector(
-        ".user"
+    const userContainer =
+        document.querySelector(
+            ".user"
+        );
+
+
+    if (!userContainer) {
+
+        return;
+
+    }
+
+
+    if (
+        document.getElementById(
+            "logout-button"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const logoutButton =
+        document.createElement(
+            "button"
+        );
+
+
+    logoutButton.id =
+        "logout-button";
+
+
+    logoutButton.type =
+        "button";
+
+
+    logoutButton.textContent =
+        "Logout";
+
+
+    logoutButton.className =
+        "logout-button";
+
+
+    logoutButton.style.marginLeft =
+        "12px";
+
+    logoutButton.style.padding =
+        "8px 12px";
+
+    logoutButton.style.border =
+        "1px solid #d1d5db";
+
+    logoutButton.style.borderRadius =
+        "7px";
+
+    logoutButton.style.background =
+        "#ffffff";
+
+    logoutButton.style.color =
+        "#374151";
+
+    logoutButton.style.cursor =
+        "pointer";
+
+    logoutButton.style.fontSize =
+        "13px";
+
+
+    userContainer.appendChild(
+        logoutButton
     );
 
 
-if (!userContainer) {
-
-    return;
-
-}
-
-
-if (
-    document.getElementById(
-        "logout-button"
-    )
-) {
-
-    return;
-
-}
-
-
-const logoutButton =
-    document.createElement(
-        "button"
+    logoutButton.addEventListener(
+        "click",
+        handleLogout
     );
-
-
-logoutButton.id =
-    "logout-button";
-
-
-logoutButton.type =
-    "button";
-
-
-logoutButton.textContent =
-    "Logout";
-
-
-logoutButton.className =
-    "logout-button";
-
-
-logoutButton.style.marginLeft =
-    "12px";
-
-logoutButton.style.padding =
-    "8px 12px";
-
-logoutButton.style.border =
-    "1px solid #d1d5db";
-
-logoutButton.style.borderRadius =
-    "7px";
-
-logoutButton.style.background =
-    "#ffffff";
-
-logoutButton.style.color =
-    "#374151";
-
-logoutButton.style.cursor =
-    "pointer";
-
-logoutButton.style.fontSize =
-    "13px";
-
-
-userContainer.appendChild(
-    logoutButton
-);
-
-
-logoutButton.addEventListener(
-    "click",
-    handleLogout
-);
 
 }
 
@@ -306,37 +306,65 @@ logoutButton.addEventListener(
 
 async function handleLogout() {
 
-const logoutButton =
-    document.getElementById(
-        "logout-button"
-    );
+    const logoutButton =
+        document.getElementById(
+            "logout-button"
+        );
 
 
-if (!logoutButton) {
+    if (!logoutButton) {
 
-    return;
+        return;
 
-}
-
-
-logoutButton.disabled =
-    true;
+    }
 
 
-logoutButton.textContent =
-    "Logging out...";
+    logoutButton.disabled =
+        true;
 
 
-try {
-
-    const { error } =
-        await supabase.auth.signOut();
+    logoutButton.textContent =
+        "Logging out...";
 
 
-    if (error) {
+    try {
+
+        const { error } =
+            await supabase.auth.signOut();
+
+
+        if (error) {
+
+            console.error(
+                "Logout failed:",
+                error
+            );
+
+
+            logoutButton.disabled =
+                false;
+
+
+            logoutButton.textContent =
+                "Logout";
+
+
+            return;
+
+        }
+
+
+        currentProfile = null;
+
+
+        window.location.href =
+            "login.html";
+
+
+    } catch (error) {
 
         console.error(
-            "Logout failed:",
+            "Logout error:",
             error
         );
 
@@ -348,35 +376,7 @@ try {
         logoutButton.textContent =
             "Logout";
 
-
-        return;
-
     }
-
-
-    currentProfile = null;
-
-
-    window.location.href =
-        "login.html";
-
-
-} catch (error) {
-
-    console.error(
-        "Logout error:",
-        error
-    );
-
-
-    logoutButton.disabled =
-        false;
-
-
-    logoutButton.textContent =
-        "Logout";
-
-}
 
 }
 
@@ -386,29 +386,75 @@ try {
 
 function setupAddStudentButtons() {
 
-const buttons =
-    document.querySelectorAll(
-        "button"
-    );
+    const buttons =
+        document.querySelectorAll(
+            "button"
+        );
 
 
-buttons.forEach(button => {
+    buttons.forEach(button => {
 
-    const buttonText =
-        button.textContent
-            .trim()
-            .toLowerCase();
+        const buttonText =
+            button.textContent
+                .trim()
+                .toLowerCase();
 
 
-    if (
-        buttonText.includes(
-            "add student"
-        )
-    ) {
+        if (
+            buttonText.includes(
+                "add student"
+            )
+        ) {
 
-        button.addEventListener(
+            button.addEventListener(
+                "click",
+                () => {
+
+                    window.location.href =
+                        "admission.html";
+
+                }
+            );
+
+        }
+
+    });
+
+}
+
+// =====================================================
+// DASHBOARD QUICK ACTIONS
+// =====================================================
+
+function setupDashboardQuickActions() {
+
+    const addStudentAction =
+        document.querySelector(
+            '.quick-action[data-action="add-student"]'
+        );
+
+    const reviewAdmissionsAction =
+        document.querySelector(
+            '.quick-action[data-action="review-admissions"]'
+        );
+
+
+    // =========================================
+    // ADD STUDENT
+    // =========================================
+
+    if (addStudentAction) {
+
+        addStudentAction.addEventListener(
             "click",
             () => {
+
+                if (
+                    currentProfile?.role !==
+                    "admin"
+                ) {
+                    return;
+                }
 
                 window.location.href =
                     "admission.html";
@@ -418,7 +464,62 @@ buttons.forEach(button => {
 
     }
 
-});
+
+    // =========================================
+    // REVIEW ADMISSIONS
+    // =========================================
+
+    if (reviewAdmissionsAction) {
+
+        reviewAdmissionsAction.addEventListener(
+            "click",
+            async () => {
+
+                const admissionsNav =
+                    document.querySelector(
+                        '.nav-item[data-page="admissions"]'
+                    );
+
+                showPage(
+                    "admissions",
+                    admissionsNav
+                );
+
+                await loadAdmissionApplications();
+
+            }
+        );
+
+    }
+
+}
+
+// =====================================================
+// NEW ADMISSION APPLICATION
+// =====================================================
+
+function setupNewAdmissionApplication() {
+
+    const button =
+        document.getElementById(
+            "new-admission-application"
+        );
+
+    if (!button) {
+        return;
+    }
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            window.open(
+                "parent-admission.html?source=staff",
+                "_blank"
+            );
+
+        }
+    );
 
 }
 
@@ -428,20 +529,20 @@ buttons.forEach(button => {
 
 async function loadStudents() {
 
-const tableBody =
-    document.getElementById(
-        "students-table-body"
-    );
+    const tableBody =
+        document.getElementById(
+            "students-table-body"
+        );
 
 
-if (!tableBody) {
+    if (!tableBody) {
 
-    return;
+        return;
 
-}
+    }
 
 
-tableBody.innerHTML = `
+    tableBody.innerHTML = `
     <tr>
         <td colspan="7">
             Loading students...
@@ -450,14 +551,14 @@ tableBody.innerHTML = `
 `;
 
 
-try {
+    try {
 
-    const {
-        data,
-        error
-    } = await supabase
-        .from("students")
-        .select(`
+        const {
+            data,
+            error
+        } = await supabase
+            .from("students")
+            .select(`
             admission_number,
             student_name,
             gender,
@@ -485,23 +586,23 @@ try {
                 )
             )
         `)
-        .order(
-            "student_name",
-            {
-                ascending: true
-            }
-        );
+            .order(
+                "student_name",
+                {
+                    ascending: true
+                }
+            );
 
 
-    if (error) {
+        if (error) {
 
-        console.error(
-            "Failed to load students:",
-            error
-        );
+            console.error(
+                "Failed to load students:",
+                error
+            );
 
 
-        tableBody.innerHTML = `
+            tableBody.innerHTML = `
             <tr>
                 <td colspan="7">
                     Unable to load students.
@@ -510,18 +611,18 @@ try {
         `;
 
 
-        return;
+            return;
 
-    }
+        }
 
-    allStudents = data || [];
+        allStudents = data || [];
 
-    if (
-        !data ||
-        data.length === 0
-    ) {
+        if (
+            !data ||
+            data.length === 0
+        ) {
 
-        tableBody.innerHTML = `
+            tableBody.innerHTML = `
             <tr>
                 <td colspan="7">
                     No students found.
@@ -530,25 +631,25 @@ try {
         `;
 
 
-        return;
+            return;
 
-    }
-
-
-    renderStudents(
-        allStudents
-    );
+        }
 
 
-} catch (error) {
-
-    console.error(
-        "Unexpected student loading error:",
-        error
-    );
+        renderStudents(
+            allStudents
+        );
 
 
-    tableBody.innerHTML = `
+    } catch (error) {
+
+        console.error(
+            "Unexpected student loading error:",
+            error
+        );
+
+
+        tableBody.innerHTML = `
         <tr>
             <td colspan="7">
                 Unable to load students.
@@ -556,7 +657,7 @@ try {
         </tr>
     `;
 
-}
+    }
 
 }
 
@@ -565,26 +666,26 @@ try {
 // =====================================================
 
 function renderStudents(
-students
+    students
 ) {
 
-const tableBody =
-    document.getElementById(
-        "students-table-body"
-    );
+    const tableBody =
+        document.getElementById(
+            "students-table-body"
+        );
 
 
-if (!tableBody) {
-    return;
-}
+    if (!tableBody) {
+        return;
+    }
 
 
-if (
-    !students ||
-    students.length === 0
-) {
+    if (
+        !students ||
+        students.length === 0
+    ) {
 
-    tableBody.innerHTML = `
+        tableBody.innerHTML = `
         <tr>
             <td colspan="7">
                 No students found.
@@ -592,95 +693,95 @@ if (
         </tr>
     `;
 
-    return;
+        return;
 
-}
-
-
-tableBody.innerHTML = "";
+    }
 
 
-students.forEach(student => {
-
-    const enrollments =
-        student.student_enrollments ||
-        [];
+    tableBody.innerHTML = "";
 
 
-    const currentEnrollment =
-        enrollments.find(
-            enrollment =>
-                enrollment
-                    .academic_years
-                    ?.is_current === true
-        )
-        ||
-        enrollments[0];
+    students.forEach(student => {
+
+        const enrollments =
+            student.student_enrollments ||
+            [];
 
 
-    const className =
-        currentEnrollment
-            ?.classes
-            ?.name
-        ||
-        "-";
+        const currentEnrollment =
+            enrollments.find(
+                enrollment =>
+                    enrollment
+                        .academic_years
+                        ?.is_current === true
+            )
+            ||
+            enrollments[0];
 
 
-    const sectionName =
-        currentEnrollment
-            ?.sections
-            ?.name
-        ||
-        "-";
+        const className =
+            currentEnrollment
+                ?.classes
+                ?.name
+            ||
+            "-";
 
 
-    const studentName =
-        student.student_name ||
-        "-";
+        const sectionName =
+            currentEnrollment
+                ?.sections
+                ?.name
+            ||
+            "-";
 
 
-    const firstLetter =
-        studentName
-            .charAt(0)
-            .toUpperCase();
+        const studentName =
+            student.student_name ||
+            "-";
 
 
-    const studentRow =
-        document.createElement(
-            "tr"
+        const firstLetter =
+            studentName
+                .charAt(0)
+                .toUpperCase();
+
+
+        const studentRow =
+            document.createElement(
+                "tr"
+            );
+
+
+        studentRow.style.cursor =
+            "pointer";
+
+
+        studentRow.title =
+            "Click to view student profile";
+
+
+        studentRow.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    student.admission_number
+                ) {
+
+                    window.open(
+                        `student-profile.html?admission=${encodeURIComponent(
+                            student.admission_number
+                        )}`,
+                        "_blank"
+                    );
+
+                }
+
+            }
         );
 
 
-    studentRow.style.cursor =
-        "pointer";
-
-
-    studentRow.title =
-        "Click to view student profile";
-
-
-    studentRow.addEventListener(
-        "click",
-        () => {
-
-            if (
-                student.admission_number
-            ) {
-
-                window.open(
-                    `student-profile.html?admission=${encodeURIComponent(
-                        student.admission_number
-                    )}`,
-                    "_blank"
-                );
-
-            }
-
-        }
-    );
-
-
-    studentRow.innerHTML = `
+        studentRow.innerHTML = `
 
         <td>
 
@@ -699,42 +800,42 @@ students.forEach(student => {
 
         <td>
             ${escapeHtml(
-        student.admission_number ||
-        "-"
-    )}
+            student.admission_number ||
+            "-"
+        )}
         </td>
 
 
         <td>
             ${escapeHtml(
-        student.date_of_birth ||
-        "-"
-    )}
+            student.date_of_birth ||
+            "-"
+        )}
         </td>
 
 
         <td>
             ${escapeHtml(
-        student.gender ||
-        "-"
-    )}
+            student.gender ||
+            "-"
+        )}
         </td>
 
 
         <td>
             ${className !== "-" &&
-            sectionName !== "-"
-            ? `${escapeHtml(className)}-${escapeHtml(sectionName)}`
-            : escapeHtml(className)
-        }
+                sectionName !== "-"
+                ? `${escapeHtml(className)}-${escapeHtml(sectionName)}`
+                : escapeHtml(className)
+            }
         </td>
 
 
         <td>
             ${escapeHtml(
-            student.mobile_number ||
-            "-"
-        )}
+                student.mobile_number ||
+                "-"
+            )}
         </td>
 
 
@@ -742,16 +843,16 @@ students.forEach(student => {
 
             <span
                 class="badge ${student.student_status ===
-            "Active"
-            ? "green-badge"
-            : "yellow-badge"
-        }"
+                "Active"
+                ? "green-badge"
+                : "yellow-badge"
+            }"
             >
 
                 ${escapeHtml(
-            student.student_status ||
-            "-"
-        )}
+                student.student_status ||
+                "-"
+            )}
 
             </span>
 
@@ -760,11 +861,11 @@ students.forEach(student => {
     `;
 
 
-    tableBody.appendChild(
-        studentRow
-    );
+        tableBody.appendChild(
+            studentRow
+        );
 
-});
+    });
 
 }
 
@@ -774,104 +875,104 @@ students.forEach(student => {
 
 function setupStudentFilters() {
 
-const searchInput =
-    document.getElementById(
-        "student-search"
-    );
+    const searchInput =
+        document.getElementById(
+            "student-search"
+        );
 
 
-const classSelect =
-    document.getElementById(
-        "student-class-filter"
-    );
+    const classSelect =
+        document.getElementById(
+            "student-class-filter"
+        );
 
 
-const sectionSelect =
-    document.getElementById(
-        "student-section-filter"
-    );
+    const sectionSelect =
+        document.getElementById(
+            "student-section-filter"
+        );
 
 
-const statusSelect =
-    document.getElementById(
-        "student-status-filter"
-    );
+    const statusSelect =
+        document.getElementById(
+            "student-status-filter"
+        );
 
 
 
-const resetButton =
-    document.getElementById(
-        "student-reset-button"
-    );
+    const resetButton =
+        document.getElementById(
+            "student-reset-button"
+        );
 
 
-if (
-    !searchInput ||
-    !classSelect ||
-    !sectionSelect ||
-    !statusSelect
-) {
+    if (
+        !searchInput ||
+        !classSelect ||
+        !sectionSelect ||
+        !statusSelect
+    ) {
 
-    return;
-
-}
-
-
-// =========================================
-// SEARCH
-// =========================================
-
-searchInput.addEventListener(
-    "input",
-    applyStudentFilters
-);
-
-
-// =========================================
-// DROPDOWNS
-// =========================================
-
-classSelect.addEventListener(
-    "change",
-    () => {
-
-        updateStudentSectionFilter();
+        return;
 
     }
-);
 
 
-sectionSelect.addEventListener(
-    "change",
-    applyStudentFilters
-);
+    // =========================================
+    // SEARCH
+    // =========================================
 
-
-statusSelect.addEventListener(
-    "change",
-    applyStudentFilters
-);
-
-
-// =========================================
-// RESET
-// =========================================
-
-if (resetButton) {
-
-    resetButton.addEventListener(
-        "click",
-        resetStudentFilters
+    searchInput.addEventListener(
+        "input",
+        applyStudentFilters
     );
 
-}
+
+    // =========================================
+    // DROPDOWNS
+    // =========================================
+
+    classSelect.addEventListener(
+        "change",
+        () => {
+
+            updateStudentSectionFilter();
+
+        }
+    );
 
 
-// =========================================
-// LOAD CLASS FILTER
-// =========================================
+    sectionSelect.addEventListener(
+        "change",
+        applyStudentFilters
+    );
 
-loadStudentFilterOptions();
+
+    statusSelect.addEventListener(
+        "change",
+        applyStudentFilters
+    );
+
+
+    // =========================================
+    // RESET
+    // =========================================
+
+    if (resetButton) {
+
+        resetButton.addEventListener(
+            "click",
+            resetStudentFilters
+        );
+
+    }
+
+
+    // =========================================
+    // LOAD CLASS FILTER
+    // =========================================
+
+    loadStudentFilterOptions();
 
 }
 
@@ -881,59 +982,59 @@ loadStudentFilterOptions();
 
 async function loadStudentFilterOptions() {
 
-const classSelect =
-    document.getElementById(
-        "student-class-filter"
-    );
-
-
-const sectionSelect =
-    document.getElementById(
-        "student-section-filter"
-    );
-
-
-if (
-    !classSelect ||
-    !sectionSelect
-) {
-
-    return;
-
-}
-
-
-try {
-
-    const {
-        data: classes,
-        error
-    } = await supabase
-        .from("classes")
-        .select(
-            "id, name, display_order"
-        )
-        .order(
-            "display_order",
-            {
-                ascending: true
-            }
+    const classSelect =
+        document.getElementById(
+            "student-class-filter"
         );
 
 
-    if (error) {
-
-        console.error(
-            "Failed to load student filter classes:",
-            error
+    const sectionSelect =
+        document.getElementById(
+            "student-section-filter"
         );
+
+
+    if (
+        !classSelect ||
+        !sectionSelect
+    ) {
 
         return;
 
     }
 
 
-    classSelect.innerHTML = `
+    try {
+
+        const {
+            data: classes,
+            error
+        } = await supabase
+            .from("classes")
+            .select(
+                "id, name, display_order"
+            )
+            .order(
+                "display_order",
+                {
+                    ascending: true
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Failed to load student filter classes:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        classSelect.innerHTML = `
 
         <option value="all">
             All Classes
@@ -942,42 +1043,42 @@ try {
     `;
 
 
-    (classes || []).forEach(
-        classItem => {
+        (classes || []).forEach(
+            classItem => {
 
-            const option =
-                document.createElement(
-                    "option"
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    classItem.id;
+
+
+                option.textContent =
+                    classItem.name;
+
+
+                classSelect.appendChild(
+                    option
                 );
 
-
-            option.value =
-                classItem.id;
-
-
-            option.textContent =
-                classItem.name;
+            }
+        );
 
 
-            classSelect.appendChild(
-                option
-            );
-
-        }
-    );
+        updateStudentSectionFilter();
 
 
-    updateStudentSectionFilter();
+    } catch (error) {
 
+        console.error(
+            "Unexpected student filter error:",
+            error
+        );
 
-} catch (error) {
-
-    console.error(
-        "Unexpected student filter error:",
-        error
-    );
-
-}
+    }
 
 }
 
@@ -988,33 +1089,33 @@ try {
 
 async function updateStudentSectionFilter() {
 
-const classSelect =
-    document.getElementById(
-        "student-class-filter"
-    );
+    const classSelect =
+        document.getElementById(
+            "student-class-filter"
+        );
 
 
-const sectionSelect =
-    document.getElementById(
-        "student-section-filter"
-    );
+    const sectionSelect =
+        document.getElementById(
+            "student-section-filter"
+        );
 
 
-if (
-    !classSelect ||
-    !sectionSelect
-) {
+    if (
+        !classSelect ||
+        !sectionSelect
+    ) {
 
-    return;
+        return;
 
-}
-
-
-const classId =
-    classSelect.value;
+    }
 
 
-sectionSelect.innerHTML = `
+    const classId =
+        classSelect.value;
+
+
+    sectionSelect.innerHTML = `
 
     <option value="all">
         All Sections
@@ -1023,88 +1124,88 @@ sectionSelect.innerHTML = `
 `;
 
 
-if (
-    !classId ||
-    classId === "all"
-) {
+    if (
+        !classId ||
+        classId === "all"
+    ) {
 
-    applyStudentFilters();
-
-    return;
-
-}
-
-
-try {
-
-    const {
-        data: sections,
-        error
-    } = await supabase
-        .from("sections")
-        .select(
-            "id, name, class_id"
-        )
-        .eq(
-            "class_id",
-            classId
-        )
-        .order(
-            "name",
-            {
-                ascending: true
-            }
-        );
-
-
-    if (error) {
-
-        console.error(
-            "Failed to load student sections:",
-            error
-        );
+        applyStudentFilters();
 
         return;
 
     }
 
 
-    (sections || []).forEach(
-        section => {
+    try {
 
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                section.id;
-
-
-            option.textContent =
-                section.name;
-
-
-            sectionSelect.appendChild(
-                option
+        const {
+            data: sections,
+            error
+        } = await supabase
+            .from("sections")
+            .select(
+                "id, name, class_id"
+            )
+            .eq(
+                "class_id",
+                classId
+            )
+            .order(
+                "name",
+                {
+                    ascending: true
+                }
             );
 
+
+        if (error) {
+
+            console.error(
+                "Failed to load student sections:",
+                error
+            );
+
+            return;
+
         }
-    );
 
 
-    applyStudentFilters();
+        (sections || []).forEach(
+            section => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
 
-} catch (error) {
+                option.value =
+                    section.id;
 
-    console.error(
-        "Unexpected section filter error:",
-        error
-    );
 
-}
+                option.textContent =
+                    section.name;
+
+
+                sectionSelect.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        applyStudentFilters();
+
+
+    } catch (error) {
+
+        console.error(
+            "Unexpected section filter error:",
+            error
+        );
+
+    }
 
 }
 
@@ -1114,178 +1215,178 @@ try {
 
 function applyStudentFilters() {
 
-const searchInput =
-    document.getElementById(
-        "student-search"
-    );
+    const searchInput =
+        document.getElementById(
+            "student-search"
+        );
 
 
-const classSelect =
-    document.getElementById(
-        "student-class-filter"
-    );
+    const classSelect =
+        document.getElementById(
+            "student-class-filter"
+        );
 
 
-const sectionSelect =
-    document.getElementById(
-        "student-section-filter"
-    );
+    const sectionSelect =
+        document.getElementById(
+            "student-section-filter"
+        );
 
 
-const statusSelect =
-    document.getElementById(
-        "student-status-filter"
-    );
+    const statusSelect =
+        document.getElementById(
+            "student-status-filter"
+        );
 
 
-if (!searchInput) {
-    return;
-}
+    if (!searchInput) {
+        return;
+    }
 
 
-const search =
-    searchInput.value
-        .trim()
-        .toLowerCase();
+    const search =
+        searchInput.value
+            .trim()
+            .toLowerCase();
 
 
-const selectedClass =
-    classSelect?.value ||
-    "all";
+    const selectedClass =
+        classSelect?.value ||
+        "all";
 
 
-const selectedSection =
-    sectionSelect?.value ||
-    "all";
+    const selectedSection =
+        sectionSelect?.value ||
+        "all";
 
 
-const selectedStatus =
-    statusSelect?.value ||
-    "all";
+    const selectedStatus =
+        statusSelect?.value ||
+        "all";
 
 
-const filteredStudents =
-    allStudents.filter(
-        student => {
+    const filteredStudents =
+        allStudents.filter(
+            student => {
 
-            const enrollments =
-                student.student_enrollments ||
-                [];
-
-
-            const currentEnrollment =
-                enrollments.find(
-                    enrollment =>
-                        enrollment
-                            .academic_years
-                            ?.is_current === true
-                )
-                ||
-                enrollments[0];
+                const enrollments =
+                    student.student_enrollments ||
+                    [];
 
 
-            const classId =
-                currentEnrollment
-                    ?.classes
-                    ?.id
-                ||
-                currentEnrollment
-                    ?.class_id
-                ||
-                "";
+                const currentEnrollment =
+                    enrollments.find(
+                        enrollment =>
+                            enrollment
+                                .academic_years
+                                ?.is_current === true
+                    )
+                    ||
+                    enrollments[0];
 
 
-            const sectionId =
-                currentEnrollment
-                    ?.sections
-                    ?.id
-                ||
-                currentEnrollment
-                    ?.section_id
-                ||
-                "";
+                const classId =
+                    currentEnrollment
+                        ?.classes
+                        ?.id
+                    ||
+                    currentEnrollment
+                        ?.class_id
+                    ||
+                    "";
 
 
-            const className =
-                currentEnrollment
-                    ?.classes
-                    ?.name
-                ||
-                "";
+                const sectionId =
+                    currentEnrollment
+                        ?.sections
+                        ?.id
+                    ||
+                    currentEnrollment
+                        ?.section_id
+                    ||
+                    "";
 
 
-            const sectionName =
-                currentEnrollment
-                    ?.sections
-                    ?.name
-                ||
-                "";
+                const className =
+                    currentEnrollment
+                        ?.classes
+                        ?.name
+                    ||
+                    "";
 
 
-            const studentName =
-                (
-                    student.student_name ||
-                    ""
-                ).toLowerCase();
+                const sectionName =
+                    currentEnrollment
+                        ?.sections
+                        ?.name
+                    ||
+                    "";
 
 
-            const admissionNumber =
-                (
-                    student.admission_number ||
-                    ""
-                ).toLowerCase();
+                const studentName =
+                    (
+                        student.student_name ||
+                        ""
+                    ).toLowerCase();
 
 
-            const mobileNumber =
-                (
-                    student.mobile_number ||
-                    ""
-                ).toLowerCase();
+                const admissionNumber =
+                    (
+                        student.admission_number ||
+                        ""
+                    ).toLowerCase();
 
 
-            const matchesSearch =
-                !search ||
-                studentName.includes(
-                    search
-                ) ||
-                admissionNumber.includes(
-                    search
-                ) ||
-                mobileNumber.includes(
-                    search
-                );
+                const mobileNumber =
+                    (
+                        student.mobile_number ||
+                        ""
+                    ).toLowerCase();
 
 
-            const matchesClass =
-                selectedClass === "all" ||
-                classId === selectedClass;
+                const matchesSearch =
+                    !search ||
+                    studentName.includes(
+                        search
+                    ) ||
+                    admissionNumber.includes(
+                        search
+                    ) ||
+                    mobileNumber.includes(
+                        search
+                    );
 
 
-            const matchesSection =
-                selectedSection === "all" ||
-                sectionId === selectedSection;
+                const matchesClass =
+                    selectedClass === "all" ||
+                    classId === selectedClass;
 
 
-            const matchesStatus =
-                selectedStatus === "all" ||
-                student.student_status ===
+                const matchesSection =
+                    selectedSection === "all" ||
+                    sectionId === selectedSection;
+
+
+                const matchesStatus =
+                    selectedStatus === "all" ||
+                    student.student_status ===
                     selectedStatus;
 
 
-            return (
-                matchesSearch &&
-                matchesClass &&
-                matchesSection &&
-                matchesStatus
-            );
+                return (
+                    matchesSearch &&
+                    matchesClass &&
+                    matchesSection &&
+                    matchesStatus
+                );
 
-        }
+            }
+        );
+
+
+    renderStudents(
+        filteredStudents
     );
-
-
-renderStudents(
-    filteredStudents
-);
 
 }
 
@@ -1362,22 +1463,22 @@ function resetStudentFilters() {
 
 function getAdmissionTableBody() {
 
-const admissionsSection =
-    document.getElementById(
-        "admissions"
+    const admissionsSection =
+        document.getElementById(
+            "admissions"
+        );
+
+
+    if (!admissionsSection) {
+
+        return null;
+
+    }
+
+
+    return admissionsSection.querySelector(
+        "tbody"
     );
-
-
-if (!admissionsSection) {
-
-    return null;
-
-}
-
-
-return admissionsSection.querySelector(
-    "tbody"
-);
 
 }
 
@@ -1387,33 +1488,33 @@ return admissionsSection.querySelector(
 
 function setupAdmissionStatusFilter() {
 
-const admissionsSection =
-    document.getElementById(
-        "admissions"
-    );
+    const admissionsSection =
+        document.getElementById(
+            "admissions"
+        );
 
 
-if (!admissionsSection) {
+    if (!admissionsSection) {
 
-    return;
+        return;
 
-}
-
-
-const statusSelect =
-    admissionsSection.querySelector(
-        "select"
-    );
+    }
 
 
-if (!statusSelect) {
+    const statusSelect =
+        admissionsSection.querySelector(
+            "select"
+        );
 
-    return;
 
-}
+    if (!statusSelect) {
+
+        return;
+
+    }
 
 
-statusSelect.innerHTML = `
+    statusSelect.innerHTML = `
 
     <option value="all">
         All Status
@@ -1441,16 +1542,16 @@ statusSelect.innerHTML = `
 
 async function loadAdmissionApplications() {
 
-const tableBody =
-    getAdmissionTableBody();
+    const tableBody =
+        getAdmissionTableBody();
 
 
-if (!tableBody) {
-    return;
-}
+    if (!tableBody) {
+        return;
+    }
 
 
-tableBody.innerHTML = `
+    tableBody.innerHTML = `
     <tr>
         <td colspan="6">
             Loading applications...
@@ -1459,35 +1560,35 @@ tableBody.innerHTML = `
 `;
 
 
-try {
+    try {
 
-    // =========================================
-    // LOAD APPLICATIONS
-    // =========================================
+        // =========================================
+        // LOAD APPLICATIONS
+        // =========================================
 
-    const {
-        data: applications,
-        error: applicationsError
-    } = await supabase
-        .from("admission_applications")
-        .select("*")
-        .order(
-            "created_at",
-            {
-                ascending: false
-            }
-        );
-
-
-    if (applicationsError) {
-
-        console.error(
-            "Failed to load admission applications:",
-            applicationsError
-        );
+        const {
+            data: applications,
+            error: applicationsError
+        } = await supabase
+            .from("admission_applications")
+            .select("*")
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
 
 
-        tableBody.innerHTML = `
+        if (applicationsError) {
+
+            console.error(
+                "Failed to load admission applications:",
+                applicationsError
+            );
+
+
+            tableBody.innerHTML = `
             <tr>
                 <td colspan="6">
                     Unable to load admission applications.
@@ -1496,289 +1597,289 @@ try {
         `;
 
 
-        return;
-    }
-
-
-    if (
-        !applications ||
-        applications.length === 0
-    ) {
-
-        admissionApplications = [];
-
-        renderAdmissionApplications([]);
-
-        return;
-    }
-
-
-    // =========================================
-    // GET UNIQUE IDs
-    // =========================================
-
-    const academicYearIds =
-        [
-            ...new Set(
-                applications
-                    .map(
-                        application =>
-                            application.academic_year_id
-                    )
-                    .filter(Boolean)
-            )
-        ];
-
-
-    const classIds =
-        [
-            ...new Set(
-                applications
-                    .map(
-                        application =>
-                            application.class_id
-                    )
-                    .filter(Boolean)
-            )
-        ];
-
-
-    const sectionIds =
-        [
-            ...new Set(
-                applications
-                    .map(
-                        application =>
-                            application.preferred_section_id
-                    )
-                    .filter(Boolean)
-            )
-        ];
-
-
-    // =========================================
-    // LOAD ACADEMIC YEARS
-    // =========================================
-
-    let academicYears = [];
-
-
-    if (
-        academicYearIds.length > 0
-    ) {
-
-        const {
-            data,
-            error
-        } = await supabase
-            .from("academic_years")
-            .select(
-                "id, name"
-            )
-            .in(
-                "id",
-                academicYearIds
-            );
-
-
-        if (error) {
-
-            console.error(
-                "Failed to load academic years:",
-                error
-            );
-
-        } else {
-
-            academicYears =
-                data || [];
-
+            return;
         }
 
-    }
 
+        if (
+            !applications ||
+            applications.length === 0
+        ) {
 
-    // =========================================
-    // LOAD CLASSES
-    // =========================================
+            admissionApplications = [];
 
-    let classes = [];
+            renderAdmissionApplications([]);
 
-
-    if (
-        classIds.length > 0
-    ) {
-
-        const {
-            data,
-            error
-        } = await supabase
-            .from("classes")
-            .select(
-                "id, name"
-            )
-            .in(
-                "id",
-                classIds
-            );
-
-
-        if (error) {
-
-            console.error(
-                "Failed to load classes:",
-                error
-            );
-
-        } else {
-
-            classes =
-                data || [];
-
+            return;
         }
 
-    }
+
+        // =========================================
+        // GET UNIQUE IDs
+        // =========================================
+
+        const academicYearIds =
+            [
+                ...new Set(
+                    applications
+                        .map(
+                            application =>
+                                application.academic_year_id
+                        )
+                        .filter(Boolean)
+                )
+            ];
 
 
-    // =========================================
-    // LOAD SECTIONS
-    // =========================================
-
-    let sections = [];
-
-
-    if (
-        sectionIds.length > 0
-    ) {
-
-        const {
-            data,
-            error
-        } = await supabase
-            .from("sections")
-            .select(
-                "id, name, class_id"
-            )
-            .in(
-                "id",
-                sectionIds
-            );
+        const classIds =
+            [
+                ...new Set(
+                    applications
+                        .map(
+                            application =>
+                                application.class_id
+                        )
+                        .filter(Boolean)
+                )
+            ];
 
 
-        if (error) {
+        const sectionIds =
+            [
+                ...new Set(
+                    applications
+                        .map(
+                            application =>
+                                application.preferred_section_id
+                        )
+                        .filter(Boolean)
+                )
+            ];
 
-            console.error(
-                "Failed to load sections:",
+
+        // =========================================
+        // LOAD ACADEMIC YEARS
+        // =========================================
+
+        let academicYears = [];
+
+
+        if (
+            academicYearIds.length > 0
+        ) {
+
+            const {
+                data,
                 error
-            );
-
-        } else {
-
-            sections =
-                data || [];
-
-        }
-
-    }
-
-
-    // =========================================
-    // CREATE LOOKUP MAPS
-    // =========================================
-
-    const academicYearMap =
-        new Map(
-            academicYears.map(
-                year => [
-                    year.id,
-                    year.name
-                ]
-            )
-        );
+            } = await supabase
+                .from("academic_years")
+                .select(
+                    "id, name"
+                )
+                .in(
+                    "id",
+                    academicYearIds
+                );
 
 
-    const classMap =
-        new Map(
-            classes.map(
-                classItem => [
-                    classItem.id,
-                    classItem.name
-                ]
-            )
-        );
+            if (error) {
 
+                console.error(
+                    "Failed to load academic years:",
+                    error
+                );
 
-    const sectionMap =
-        new Map(
-            sections.map(
-                section => [
-                    section.id,
-                    section.name
-                ]
-            )
-        );
+            } else {
 
-
-    // =========================================
-    // ATTACH DISPLAY NAMES
-    // =========================================
-
-    admissionApplications =
-        applications.map(
-            application => {
-
-                return {
-
-                    ...application,
-
-                    academic_year_name:
-                        academicYearMap.get(
-                            application
-                                .academic_year_id
-                        ) || "-",
-
-                    applying_class_name:
-                        classMap.get(
-                            application
-                                .class_id
-                        ) || "-",
-
-                    preferred_section_name:
-                        sectionMap.get(
-                            application
-                                .preferred_section_id
-                        ) || "-"
-
-                };
+                academicYears =
+                    data || [];
 
             }
+
+        }
+
+
+        // =========================================
+        // LOAD CLASSES
+        // =========================================
+
+        let classes = [];
+
+
+        if (
+            classIds.length > 0
+        ) {
+
+            const {
+                data,
+                error
+            } = await supabase
+                .from("classes")
+                .select(
+                    "id, name"
+                )
+                .in(
+                    "id",
+                    classIds
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "Failed to load classes:",
+                    error
+                );
+
+            } else {
+
+                classes =
+                    data || [];
+
+            }
+
+        }
+
+
+        // =========================================
+        // LOAD SECTIONS
+        // =========================================
+
+        let sections = [];
+
+
+        if (
+            sectionIds.length > 0
+        ) {
+
+            const {
+                data,
+                error
+            } = await supabase
+                .from("sections")
+                .select(
+                    "id, name, class_id"
+                )
+                .in(
+                    "id",
+                    sectionIds
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "Failed to load sections:",
+                    error
+                );
+
+            } else {
+
+                sections =
+                    data || [];
+
+            }
+
+        }
+
+
+        // =========================================
+        // CREATE LOOKUP MAPS
+        // =========================================
+
+        const academicYearMap =
+            new Map(
+                academicYears.map(
+                    year => [
+                        year.id,
+                        year.name
+                    ]
+                )
+            );
+
+
+        const classMap =
+            new Map(
+                classes.map(
+                    classItem => [
+                        classItem.id,
+                        classItem.name
+                    ]
+                )
+            );
+
+
+        const sectionMap =
+            new Map(
+                sections.map(
+                    section => [
+                        section.id,
+                        section.name
+                    ]
+                )
+            );
+
+
+        // =========================================
+        // ATTACH DISPLAY NAMES
+        // =========================================
+
+        admissionApplications =
+            applications.map(
+                application => {
+
+                    return {
+
+                        ...application,
+
+                        academic_year_name:
+                            academicYearMap.get(
+                                application
+                                    .academic_year_id
+                            ) || "-",
+
+                        applying_class_name:
+                            classMap.get(
+                                application
+                                    .class_id
+                            ) || "-",
+
+                        preferred_section_name:
+                            sectionMap.get(
+                                application
+                                    .preferred_section_id
+                            ) || "-"
+
+                    };
+
+                }
+            );
+
+
+        console.log(
+            "Admission applications with related data:",
+            admissionApplications
         );
 
 
-    console.log(
-        "Admission applications with related data:",
-        admissionApplications
-    );
+        // =========================================
+        // DISPLAY
+        // =========================================
+
+        renderAdmissionApplications(
+            admissionApplications
+        );
 
 
-    // =========================================
-    // DISPLAY
-    // =========================================
+    } catch (error) {
 
-    renderAdmissionApplications(
-        admissionApplications
-    );
-
-
-} catch (error) {
-
-    console.error(
-        "Unexpected admission loading error:",
-        error
-    );
+        console.error(
+            "Unexpected admission loading error:",
+            error
+        );
 
 
-    tableBody.innerHTML = `
+        tableBody.innerHTML = `
         <tr>
             <td colspan="6">
                 Unable to load admission applications.
@@ -1786,7 +1887,7 @@ try {
         </tr>
     `;
 
-}
+    }
 
 }
 
@@ -1795,26 +1896,26 @@ try {
 // =====================================================
 
 function renderAdmissionApplications(
-applications
+    applications
 ) {
 
-const tableBody =
-    getAdmissionTableBody();
+    const tableBody =
+        getAdmissionTableBody();
 
 
-if (!tableBody) {
+    if (!tableBody) {
 
-    return;
+        return;
 
-}
+    }
 
 
-if (
-    !applications ||
-    applications.length === 0
-) {
+    if (
+        !applications ||
+        applications.length === 0
+    ) {
 
-    tableBody.innerHTML = `
+        tableBody.innerHTML = `
         <tr>
             <td colspan="6">
                 No applications yet
@@ -1823,108 +1924,108 @@ if (
     `;
 
 
-    return;
+        return;
 
-}
-
-
-tableBody.innerHTML =
-    "";
+    }
 
 
-applications.forEach(
-    application => {
-
-        const row =
-            document.createElement(
-                "tr"
-            );
+    tableBody.innerHTML =
+        "";
 
 
-        row.style.cursor =
-            "pointer";
+    applications.forEach(
+        application => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
 
 
-        row.title =
-            "Click to review application";
+            row.style.cursor =
+                "pointer";
 
 
-        const submittedDate =
-            application.created_at
-                ? new Date(
-                    application.created_at
-                ).toLocaleDateString(
-                    "en-IN",
-                    {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric"
-                    }
-                )
-                : "-";
+            row.title =
+                "Click to review application";
 
 
-        const className =
-            application.applying_class_name ||
-            application.class_name ||
-            "-";
+            const submittedDate =
+                application.created_at
+                    ? new Date(
+                        application.created_at
+                    ).toLocaleDateString(
+                        "en-IN",
+                        {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric"
+                        }
+                    )
+                    : "-";
 
 
-        const sectionName =
-            application.preferred_section_name ||
-            application.section_name ||
-            "";
+            const className =
+                application.applying_class_name ||
+                application.class_name ||
+                "-";
 
 
-        const applyingClass =
-            sectionName
-                ? `${className}-${sectionName}`
-                : className;
+            const sectionName =
+                application.preferred_section_name ||
+                application.section_name ||
+                "";
 
 
-        const parentName =
-            application.father_name ||
-            application.mother_name ||
-            "-";
+            const applyingClass =
+                sectionName
+                    ? `${className}-${sectionName}`
+                    : className;
 
 
-        const status =
-            application.status ||
-            "Pending";
+            const parentName =
+                application.father_name ||
+                application.mother_name ||
+                "-";
 
 
-        const statusClass =
-            getAdmissionStatusClass(
-                status
-            );
+            const status =
+                application.status ||
+                "Pending";
 
 
-        row.innerHTML = `
+            const statusClass =
+                getAdmissionStatusClass(
+                    status
+                );
+
+
+            row.innerHTML = `
 
             <td>
                 ${escapeHtml(
-            application.application_number ||
-            "-"
-        )}
+                application.application_number ||
+                "-"
+            )}
             </td>
 
             <td>
                 ${escapeHtml(
-            application.student_name ||
-            "-"
-        )}
+                application.student_name ||
+                "-"
+            )}
             </td>
 
             <td>
                 ${escapeHtml(
-            applyingClass
-        )}
+                applyingClass
+            )}
             </td>
 
             <td>
                 ${escapeHtml(
-            parentName
-        )}
+                parentName
+            )}
             </td>
 
             <td>
@@ -1942,24 +2043,24 @@ applications.forEach(
         `;
 
 
-        row.addEventListener(
-            "click",
-            () => {
+            row.addEventListener(
+                "click",
+                () => {
 
-                openAdmissionReview(
-                    application
-                );
+                    openAdmissionReview(
+                        application
+                    );
 
-            }
-        );
+                }
+            );
 
 
-        tableBody.appendChild(
-            row
-        );
+            tableBody.appendChild(
+                row
+            );
 
-    }
-);
+        }
+    );
 
 }
 
@@ -1968,40 +2069,40 @@ applications.forEach(
 // =====================================================
 
 function getAdmissionStatusClass(
-status
+    status
 ) {
 
-if (!status) {
-
-    return "yellow-badge";
-
-}
-
-
-switch (
-status.toLowerCase()
-) {
-
-    case "approved":
-
-        return "green-badge";
-
-
-    case "rejected":
+    if (!status) {
 
         return "yellow-badge";
 
-
-    case "pending":
-
-        return "yellow-badge";
+    }
 
 
-    default:
+    switch (
+    status.toLowerCase()
+    ) {
 
-        return "yellow-badge";
+        case "approved":
 
-}
+            return "green-badge";
+
+
+        case "rejected":
+
+            return "yellow-badge";
+
+
+        case "pending":
+
+            return "yellow-badge";
+
+
+        default:
+
+            return "yellow-badge";
+
+    }
 
 }
 
@@ -2011,187 +2112,187 @@ status.toLowerCase()
 
 function setupAdmissionFilters() {
 
-const admissionsSection =
-    document.getElementById(
-        "admissions"
-    );
+    const admissionsSection =
+        document.getElementById(
+            "admissions"
+        );
 
 
-if (!admissionsSection) {
+    if (!admissionsSection) {
 
-    return;
+        return;
 
-}
-
-
-const searchInput =
-    admissionsSection.querySelector(
-        'input[type="text"]'
-    );
+    }
 
 
-const statusSelect =
-    admissionsSection.querySelector(
-        "select"
-    );
+    const searchInput =
+        admissionsSection.querySelector(
+            'input[type="text"]'
+        );
 
 
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "input",
-        applyAdmissionFilters
-    );
-
-}
+    const statusSelect =
+        admissionsSection.querySelector(
+            "select"
+        );
 
 
-if (statusSelect) {
+    if (searchInput) {
 
-    statusSelect.addEventListener(
-        "change",
-        applyAdmissionFilters
-    );
+        searchInput.addEventListener(
+            "input",
+            applyAdmissionFilters
+        );
 
-}
+    }
+
+
+    if (statusSelect) {
+
+        statusSelect.addEventListener(
+            "change",
+            applyAdmissionFilters
+        );
+
+    }
 
 }
 
 function applyAdmissionFilters() {
 
-const admissionsSection =
-    document.getElementById(
-        "admissions"
-    );
+    const admissionsSection =
+        document.getElementById(
+            "admissions"
+        );
 
 
-if (!admissionsSection) {
+    if (!admissionsSection) {
 
-    return;
+        return;
 
-}
-
-
-const searchInput =
-    admissionsSection.querySelector(
-        'input[type="text"]'
-    );
+    }
 
 
-const statusSelect =
-    admissionsSection.querySelector(
-        "select"
-    );
+    const searchInput =
+        admissionsSection.querySelector(
+            'input[type="text"]'
+        );
 
 
-const search =
-    searchInput
-        ?.value
-        .trim()
-        .toLowerCase()
-    ||
-    "";
+    const statusSelect =
+        admissionsSection.querySelector(
+            "select"
+        );
 
 
-const selectedStatus =
-    statusSelect
-        ?.value
-    ||
-    "all";
+    const search =
+        searchInput
+            ?.value
+            .trim()
+            .toLowerCase()
+        ||
+        "";
 
 
-const filteredApplications =
-    admissionApplications.filter(
-        application => {
+    const selectedStatus =
+        statusSelect
+            ?.value
+        ||
+        "all";
 
-            const applicationNumber =
-                (
-                    application
-                        .application_number
+
+    const filteredApplications =
+        admissionApplications.filter(
+            application => {
+
+                const applicationNumber =
+                    (
+                        application
+                            .application_number
+                        ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const studentName =
+                    (
+                        application
+                            .student_name
+                        ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const fatherName =
+                    (
+                        application
+                            .father_name
+                        ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const motherName =
+                    (
+                        application
+                            .mother_name
+                        ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const mobileNumber =
+                    (
+                        application
+                            .mobile_number
+                        ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const matchesSearch =
+                    !search ||
+                    applicationNumber.includes(
+                        search
+                    ) ||
+                    studentName.includes(
+                        search
+                    ) ||
+                    fatherName.includes(
+                        search
+                    ) ||
+                    motherName.includes(
+                        search
+                    ) ||
+                    mobileNumber.includes(
+                        search
+                    );
+
+
+                const matchesStatus =
+                    selectedStatus === "all"
                     ||
-                    ""
-                )
-                    .toLowerCase();
+                    application.status ===
+                    selectedStatus;
 
 
-            const studentName =
-                (
-                    application
-                        .student_name
-                    ||
-                    ""
-                )
-                    .toLowerCase();
-
-
-            const fatherName =
-                (
-                    application
-                        .father_name
-                    ||
-                    ""
-                )
-                    .toLowerCase();
-
-
-            const motherName =
-                (
-                    application
-                        .mother_name
-                    ||
-                    ""
-                )
-                    .toLowerCase();
-
-
-            const mobileNumber =
-                (
-                    application
-                        .mobile_number
-                    ||
-                    ""
-                )
-                    .toLowerCase();
-
-
-            const matchesSearch =
-                !search ||
-                applicationNumber.includes(
-                    search
-                ) ||
-                studentName.includes(
-                    search
-                ) ||
-                fatherName.includes(
-                    search
-                ) ||
-                motherName.includes(
-                    search
-                ) ||
-                mobileNumber.includes(
-                    search
+                return (
+                    matchesSearch &&
+                    matchesStatus
                 );
 
-
-            const matchesStatus =
-                selectedStatus === "all"
-                ||
-                application.status ===
-                selectedStatus;
+            }
+        );
 
 
-            return (
-                matchesSearch &&
-                matchesStatus
-            );
-
-        }
+    renderAdmissionApplications(
+        filteredApplications
     );
-
-
-renderAdmissionApplications(
-    filteredApplications
-);
 
 }
 
@@ -2201,22 +2302,22 @@ renderAdmissionApplications(
 
 function escapeHtml(value) {
 
-if (
-    value === null ||
-    value === undefined
-) {
+    if (
+        value === null ||
+        value === undefined
+    ) {
 
-    return "";
+        return "";
 
-}
+    }
 
 
-return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
 }
 
@@ -2225,21 +2326,21 @@ return String(value)
 // =====================================================
 
 function displayValue(
-value
+    value
 ) {
 
-if (
-    value === null ||
-    value === undefined ||
-    value === ""
-) {
+    if (
+        value === null ||
+        value === undefined ||
+        value === ""
+    ) {
 
-    return "-";
+        return "-";
 
-}
+    }
 
 
-return escapeHtml(value);
+    return escapeHtml(value);
 
 }
 
@@ -2249,28 +2350,28 @@ return escapeHtml(value);
 
 function injectReviewModalStyles() {
 
-if (
-    document.getElementById(
-        "admission-review-styles"
-    )
-) {
+    if (
+        document.getElementById(
+            "admission-review-styles"
+        )
+    ) {
 
-    return;
+        return;
 
-}
-
-
-const style =
-    document.createElement(
-        "style"
-    );
+    }
 
 
-style.id =
-    "admission-review-styles";
+    const style =
+        document.createElement(
+            "style"
+        );
 
 
-style.textContent = `
+    style.id =
+        "admission-review-styles";
+
+
+    style.textContent = `
 
     .admission-review-modal {
         position: fixed;
@@ -2524,9 +2625,9 @@ style.textContent = `
 `;
 
 
-document.head.appendChild(
-    style
-);
+    document.head.appendChild(
+        style
+    );
 
 }
 
@@ -2536,32 +2637,32 @@ document.head.appendChild(
 
 function createReviewModal() {
 
-if (
-    document.getElementById(
-        "admission-review-modal"
-    )
-) {
+    if (
+        document.getElementById(
+            "admission-review-modal"
+        )
+    ) {
 
-    return;
+        return;
 
-}
-
-
-const modal =
-    document.createElement(
-        "div"
-    );
+    }
 
 
-modal.id =
-    "admission-review-modal";
+    const modal =
+        document.createElement(
+            "div"
+        );
 
 
-modal.className =
-    "admission-review-modal";
+    modal.id =
+        "admission-review-modal";
 
 
-modal.innerHTML = `
+    modal.className =
+        "admission-review-modal";
+
+
+    modal.innerHTML = `
 
     <div
         class="admission-review-dialog"
@@ -2642,80 +2743,80 @@ modal.innerHTML = `
 `;
 
 
-document.body.appendChild(
-    modal
-);
-
-
-document
-    .getElementById(
-        "review-close-top"
-    )
-    .addEventListener(
-        "click",
-        closeAdmissionReview
+    document.body.appendChild(
+        modal
     );
 
 
-document
-    .getElementById(
-        "review-close-bottom"
-    )
-    .addEventListener(
+    document
+        .getElementById(
+            "review-close-top"
+        )
+        .addEventListener(
+            "click",
+            closeAdmissionReview
+        );
+
+
+    document
+        .getElementById(
+            "review-close-bottom"
+        )
+        .addEventListener(
+            "click",
+            closeAdmissionReview
+        );
+
+
+    document
+        .getElementById(
+            "review-approve-button"
+        )
+        .addEventListener(
+            "click",
+            approveCurrentApplication
+        );
+
+
+    document
+        .getElementById(
+            "review-reject-button"
+        )
+        .addEventListener(
+            "click",
+            rejectCurrentApplication
+        );
+
+    modal.addEventListener(
         "click",
-        closeAdmissionReview
-    );
+        event => {
 
+            if (
+                event.target === modal
+            ) {
 
-document
-    .getElementById(
-        "review-approve-button"
-    )
-    .addEventListener(
-        "click",
-        approveCurrentApplication
-    );
+                closeAdmissionReview();
 
-
-document
-    .getElementById(
-        "review-reject-button"
-    )
-    .addEventListener(
-        "click",
-        rejectCurrentApplication
-    );
-
-modal.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target === modal
-        ) {
-
-            closeAdmissionReview();
+            }
 
         }
-
-    }
-);
+    );
 
 
-document.addEventListener(
-    "keydown",
-    event => {
+    document.addEventListener(
+        "keydown",
+        event => {
 
-        if (
-            event.key === "Escape"
-        ) {
+            if (
+                event.key === "Escape"
+            ) {
 
-            closeAdmissionReview();
+                closeAdmissionReview();
+
+            }
 
         }
-
-    }
-);
+    );
 
 }
 
@@ -2724,90 +2825,90 @@ document.addEventListener(
 // =====================================================
 
 async function openAdmissionReview(
-application
+    application
 ) {
-currentReviewApplication = application;
+    currentReviewApplication = application;
 
-injectReviewModalStyles();
+    injectReviewModalStyles();
 
-createReviewModal();
-
-
-const modal =
-    document.getElementById(
-        "admission-review-modal"
-    );
+    createReviewModal();
 
 
-const title =
-    document.getElementById(
-        "admission-review-title"
-    );
+    const modal =
+        document.getElementById(
+            "admission-review-modal"
+        );
 
 
-const number =
-    document.getElementById(
-        "admission-review-number"
-    );
+    const title =
+        document.getElementById(
+            "admission-review-title"
+        );
 
 
-const body =
-    document.getElementById(
-        "admission-review-body"
-    );
+    const number =
+        document.getElementById(
+            "admission-review-number"
+        );
 
 
-const approveButton =
-    document.getElementById(
-        "review-approve-button"
-    );
+    const body =
+        document.getElementById(
+            "admission-review-body"
+        );
 
 
-const rejectButton =
-    document.getElementById(
-        "review-reject-button"
-    );
+    const approveButton =
+        document.getElementById(
+            "review-approve-button"
+        );
 
 
-const status =
-    application.status ||
-    "Pending";
+    const rejectButton =
+        document.getElementById(
+            "review-reject-button"
+        );
 
 
-const submittedDate =
-    application.created_at
-        ? new Date(
-            application.created_at
-        ).toLocaleString(
-            "en-IN"
-        )
-        : "-";
+    const status =
+        application.status ||
+        "Pending";
 
 
-const updatedDate =
-    application.updated_at
-        ? new Date(
-            application.updated_at
-        ).toLocaleString(
-            "en-IN"
-        )
-        : "-";
+    const submittedDate =
+        application.created_at
+            ? new Date(
+                application.created_at
+            ).toLocaleString(
+                "en-IN"
+            )
+            : "-";
 
 
-title.textContent =
-    "Admission Application";
+    const updatedDate =
+        application.updated_at
+            ? new Date(
+                application.updated_at
+            ).toLocaleString(
+                "en-IN"
+            )
+            : "-";
 
 
-number.textContent =
-    application.application_number ||
-    "-";
+    title.textContent =
+        "Admission Application";
 
 
-// =========================================
-// APPLICATION DETAILS
-// =========================================
+    number.textContent =
+        application.application_number ||
+        "-";
 
-body.innerHTML = `
+
+    // =========================================
+    // APPLICATION DETAILS
+    // =========================================
+
+    body.innerHTML = `
 
     <div class="review-status-row">
 
@@ -2816,9 +2917,9 @@ body.innerHTML = `
         </strong>
 
         <span class="badge ${getAdmissionStatusClass(
-    status
-)
-    }">
+        status
+    )
+        }">
             ${escapeHtml(status)}
         </span>
 
@@ -2839,39 +2940,39 @@ body.innerHTML = `
         <div class="review-grid">
 
             ${reviewField(
-        "Student Name",
-        application.student_name
-    )}
+            "Student Name",
+            application.student_name
+        )}
 
             ${reviewField(
-        "Gender",
-        application.gender
-    )}
+            "Gender",
+            application.gender
+        )}
 
             ${reviewField(
-        "Date of Birth",
-        application.date_of_birth
-    )}
+            "Date of Birth",
+            application.date_of_birth
+        )}
 
             ${reviewField(
-        "PEN Number",
-        application.pen_number
-    )}
+            "PEN Number",
+            application.pen_number
+        )}
 
             ${reviewField(
-        "Social Category",
-        application.social_category
-    )}
+            "Social Category",
+            application.social_category
+        )}
 
             ${reviewField(
-        "Nationality",
-        application.nationality
-    )}
+            "Nationality",
+            application.nationality
+        )}
 
             ${reviewField(
-        "Blood Group",
-        application.blood_group
-    )}
+            "Blood Group",
+            application.blood_group
+        )}
 
         </div>
 
@@ -2892,19 +2993,19 @@ body.innerHTML = `
         <div class="review-grid">
 
             ${reviewField(
-        "Father's Name",
-        application.father_name
-    )}
+            "Father's Name",
+            application.father_name
+        )}
 
             ${reviewField(
-        "Mother's Name",
-        application.mother_name
-    )}
+            "Mother's Name",
+            application.mother_name
+        )}
 
             ${reviewField(
-        "Guardian's Name",
-        application.guardian_name
-    )}
+            "Guardian's Name",
+            application.guardian_name
+        )}
 
         </div>
 
@@ -2925,30 +3026,30 @@ body.innerHTML = `
         <div class="review-grid">
 
             ${reviewField(
-        "Mobile Number",
-        application.mobile_number
-    )}
+            "Mobile Number",
+            application.mobile_number
+        )}
 
             ${reviewField(
-        "Alternate Mobile",
-        application.alternate_mobile_number
-    )}
+            "Alternate Mobile",
+            application.alternate_mobile_number
+        )}
 
             ${reviewField(
-        "Email",
-        application.email
-    )}
+            "Email",
+            application.email
+        )}
 
             ${reviewField(
-        "Pincode",
-        application.pincode
-    )}
+            "Pincode",
+            application.pincode
+        )}
 
             ${reviewField(
-        "Address",
-        application.address,
-        true
-    )}
+            "Address",
+            application.address,
+            true
+        )}
 
         </div>
 
@@ -3032,10 +3133,10 @@ body.innerHTML = `
 
 
             ${reviewField(
-        "Previous School",
-        application.previous_school_name,
-        true
-    )}
+            "Previous School",
+            application.previous_school_name,
+            true
+        )}
 
         </div>
 
@@ -3056,14 +3157,14 @@ body.innerHTML = `
         <div class="review-grid">
 
             ${reviewField(
-        "Submitted",
-        submittedDate
-    )}
+            "Submitted",
+            submittedDate
+        )}
 
             ${reviewField(
-        "Last Updated",
-        updatedDate
-    )}
+            "Last Updated",
+            updatedDate
+        )}
 
         </div>
 
@@ -3072,85 +3173,79 @@ body.innerHTML = `
 `;
 
 
-// =========================================
-// LOAD DROPDOWNS
-// =========================================
+    // =========================================
+    // LOAD DROPDOWNS
+    // =========================================
 
-await loadReviewAssignmentData(
-    application
-);
-
-
-// =========================================
-// CLASS CHANGE
-// =========================================
-
-const reviewClassSelect =
-    document.getElementById(
-        "review-class"
+    await loadReviewAssignmentData(
+        application
     );
 
 
-if (reviewClassSelect) {
+    // =========================================
+    // CLASS CHANGE
+    // =========================================
 
-    reviewClassSelect.addEventListener(
-        "change",
-        async () => {
+    const reviewClassSelect =
+        document.getElementById(
+            "review-class"
+        );
 
-            await loadReviewSections(
-                reviewClassSelect.value,
-                null
-            );
 
-        }
+    if (reviewClassSelect) {
+
+        reviewClassSelect.addEventListener(
+            "change",
+            async () => {
+
+                await loadReviewSections(
+                    reviewClassSelect.value,
+                    null
+                );
+
+            }
+        );
+
+    }
+
+
+    // =========================================
+    // APPROVE / REJECT VISIBILITY
+    // =========================================
+
+    const isAdmin =
+        currentProfile?.role === "admin";
+
+    if (
+        status.toLowerCase() === "pending" &&
+        isAdmin
+    ) {
+
+        approveButton.style.display = "";
+        rejectButton.style.display = "";
+
+        approveButton.disabled = false;
+        rejectButton.disabled = false;
+
+    } else {
+
+        approveButton.style.display = "none";
+        rejectButton.style.display = "none";
+
+    }
+
+
+    // =========================================
+    // OPEN MODAL
+    // =========================================
+
+    modal.classList.add(
+        "open"
     );
 
-}
 
-
-// =========================================
-// APPROVE / REJECT VISIBILITY
-// =========================================
-
-if (
-    status.toLowerCase() ===
-    "pending"
-) {
-
-    approveButton.style.display =
-        "";
-
-    rejectButton.style.display =
-        "";
-
-    approveButton.disabled =
-        false;
-
-    rejectButton.disabled =
-        false;
-
-} else {
-
-    approveButton.style.display =
-        "none";
-
-    rejectButton.style.display =
-        "none";
-
-}
-
-
-// =========================================
-// OPEN MODAL
-// =========================================
-
-modal.classList.add(
-    "open"
-);
-
-
-document.body.style.overflow =
-    "hidden";
+    document.body.style.overflow =
+        "hidden";
 
 }
 
@@ -3159,15 +3254,15 @@ document.body.style.overflow =
 // =====================================================
 
 function reviewField(
-label,
-value,
-fullWidth = false
+    label,
+    value,
+    fullWidth = false
 ) {
 
-return `
+    return `
 
     <div class="review-field ${fullWidth ? "full" : ""
-    }">
+        }">
 
         <span class="review-field-label">
             ${escapeHtml(label)}
@@ -3189,26 +3284,26 @@ return `
 
 function closeAdmissionReview() {
 
-const modal =
-    document.getElementById(
-        "admission-review-modal"
+    const modal =
+        document.getElementById(
+            "admission-review-modal"
+        );
+
+
+    if (!modal) {
+
+        return;
+
+    }
+
+
+    modal.classList.remove(
+        "open"
     );
 
 
-if (!modal) {
-
-    return;
-
-}
-
-
-modal.classList.remove(
-    "open"
-);
-
-
-document.body.style.overflow =
-    "";
+    document.body.style.overflow =
+        "";
 
 }
 
@@ -3218,108 +3313,147 @@ document.body.style.overflow =
 
 async function approveCurrentApplication() {
 
-if (!currentReviewApplication) {
+    if (!currentReviewApplication) {
 
-    return;
+        return;
 
-}
-
-
-const academicYear =
-    document.getElementById(
-        "review-academic-year"
-    ).value;
+    }
 
 
-const classId =
-    document.getElementById(
-        "review-class"
-    ).value;
+    const academicYear =
+        document.getElementById(
+            "review-academic-year"
+        ).value;
 
 
-const sectionId =
-    document.getElementById(
-        "review-section"
-    ).value;
+    const classId =
+        document.getElementById(
+            "review-class"
+        ).value;
 
 
-if (
-    !academicYear ||
-    !classId ||
-    !sectionId
-) {
-
-    alert(
-        "Please select Academic Year, Class and Section."
-    );
-
-    return;
-
-}
+    const sectionId =
+        document.getElementById(
+            "review-section"
+        ).value;
 
 
-const confirmed =
-    confirm(
-        "Are you sure you want to approve this admission?"
-    );
+    if (
+        !academicYear ||
+        !classId ||
+        !sectionId
+    ) {
+
+        alert(
+            "Please select Academic Year, Class and Section."
+        );
+
+        return;
+
+    }
 
 
-if (!confirmed) {
-
-    return;
-
-}
-
-
-const approveButton =
-    document.getElementById(
-        "review-approve-button"
-    );
+    const confirmed =
+        confirm(
+            "Are you sure you want to approve this admission?"
+        );
 
 
-approveButton.disabled =
-    true;
+    if (!confirmed) {
+
+        return;
+
+    }
 
 
-approveButton.textContent =
-    "Approving...";
+    const approveButton =
+        document.getElementById(
+            "review-approve-button"
+        );
 
 
-try {
+    approveButton.disabled =
+        true;
 
-    const {
-        data,
-        error
-    } = await supabase.rpc(
-        "approve_admission_application",
-        {
 
-            p_application_id:
-                currentReviewApplication.id,
+    approveButton.textContent =
+        "Approving...";
 
-            p_academic_year_id:
-                academicYear,
 
-            p_class_id:
-                classId,
+    try {
 
-            p_section_id:
-                sectionId
+        const {
+            data,
+            error
+        } = await supabase.rpc(
+            "approve_admission_application",
+            {
+
+                p_application_id:
+                    currentReviewApplication.id,
+
+                p_academic_year_id:
+                    academicYear,
+
+                p_class_id:
+                    classId,
+
+                p_section_id:
+                    sectionId
+
+            }
+        );
+
+
+        if (error) {
+
+            console.error(
+                "Approval failed:",
+                error
+            );
+
+
+            alert(
+                error.message
+            );
+
+
+            approveButton.disabled =
+                false;
+
+
+            approveButton.textContent =
+                "Approve";
+
+
+            return;
 
         }
-    );
 
 
-    if (error) {
+        alert(
+            `Admission approved successfully.\n\nAdmission Number: ${data}`
+        );
+
+
+        closeAdmissionReview();
+
+
+        await loadAdmissionApplications();
+
+        await loadStudents();
+
+
+    } catch (error) {
 
         console.error(
-            "Approval failed:",
+            "Unexpected approval error:",
             error
         );
 
 
         alert(
-            error.message
+            "Something went wrong while approving the application."
         );
 
 
@@ -3330,46 +3464,7 @@ try {
         approveButton.textContent =
             "Approve";
 
-
-        return;
-
     }
-
-
-    alert(
-        `Admission approved successfully.\n\nAdmission Number: ${data}`
-    );
-
-
-    closeAdmissionReview();
-
-
-    await loadAdmissionApplications();
-
-    await loadStudents();
-
-
-} catch (error) {
-
-    console.error(
-        "Unexpected approval error:",
-        error
-    );
-
-
-    alert(
-        "Something went wrong while approving the application."
-    );
-
-
-    approveButton.disabled =
-        false;
-
-
-    approveButton.textContent =
-        "Approve";
-
-}
 
 }
 
@@ -3379,91 +3474,91 @@ try {
 
 async function rejectCurrentApplication() {
 
-if (!currentReviewApplication) {
-
-    return;
-
-}
-
-
-const confirmed =
-    confirm(
-        "Are you sure you want to reject this admission?"
-    );
-
-
-if (!confirmed) {
-
-    return;
-
-}
-
-
-try {
-
-    const {
-        data,
-        error
-    } = await supabase.rpc(
-        "reject_admission_application",
-        {
-
-            p_application_id:
-                currentReviewApplication.id
-
-        }
-    );
-
-
-    if (error) {
-
-        console.error(
-            "Rejection failed:",
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "Failed to reject application."
-        );
-
+    if (!currentReviewApplication) {
 
         return;
 
     }
 
 
-    console.log(
-        "Application rejected:",
-        data
-    );
+    const confirmed =
+        confirm(
+            "Are you sure you want to reject this admission?"
+        );
 
 
-    alert(
-        "Application rejected successfully."
-    );
+    if (!confirmed) {
+
+        return;
+
+    }
 
 
-    closeAdmissionReview();
+    try {
+
+        const {
+            data,
+            error
+        } = await supabase.rpc(
+            "reject_admission_application",
+            {
+
+                p_application_id:
+                    currentReviewApplication.id
+
+            }
+        );
 
 
-    await loadAdmissionApplications();
+        if (error) {
+
+            console.error(
+                "Rejection failed:",
+                error
+            );
 
 
-} catch (error) {
-
-    console.error(
-        "Unexpected rejection error:",
-        error
-    );
+            alert(
+                error.message ||
+                "Failed to reject application."
+            );
 
 
-    alert(
-        "Something went wrong while rejecting the application."
-    );
+            return;
 
-}
+        }
+
+
+        console.log(
+            "Application rejected:",
+            data
+        );
+
+
+        alert(
+            "Application rejected successfully."
+        );
+
+
+        closeAdmissionReview();
+
+
+        await loadAdmissionApplications();
+
+
+    } catch (error) {
+
+        console.error(
+            "Unexpected rejection error:",
+            error
+        );
+
+
+        alert(
+            "Something went wrong while rejecting the application."
+        );
+
+    }
 
 }
 
@@ -3473,132 +3568,141 @@ try {
 
 async function initializePortal() {
 
-try {
+    try {
 
-    console.log(
-        "Initializing school portal..."
-    );
-
-
-    // =========================================
-    // AUTHENTICATION
-    // =========================================
-
-    const profile =
-        await checkAuthSession();
+        console.log(
+            "Initializing school portal..."
+        );
 
 
-    if (!profile) {
+        // =========================================
+        // AUTHENTICATION
+        // =========================================
 
-        window.location.href =
-            "login.html";
+        const profile =
+            await checkAuthSession();
 
 
-        return;
+        if (!profile) {
+
+            window.location.href =
+                "login.html";
+
+
+            return;
+
+        }
+
+
+        // =========================================
+        // SAVE PROFILE
+        // =========================================
+
+        currentProfile =
+            profile;
+
+
+        console.log(
+            "Authenticated user:",
+            currentProfile
+        );
+
+
+        // =========================================
+        // UPDATE USER UI
+        // =========================================
+
+        updateUserInterface();
+
+
+        // =========================================
+        // ROLE UI
+        // =========================================
+
+        updateRoleBasedUI();
+
+
+        // =========================================
+        // SIDEBAR
+        // =========================================
+
+        setupSidebarNavigation();
+
+
+        // =========================================
+        // ADD STUDENT
+        // =========================================
+
+        setupAddStudentButtons();
+
+        // =========================================
+        // DASHBOARD QUICK ACTIONS
+        // =========================================
+        setupDashboardQuickActions();
+
+        // =========================================
+        // NEW ADMISSION APPLICATION BUTTON FOR STAFF
+        // =========================================
+        setupNewAdmissionApplication();
+
+        // =========================================
+        // LOGOUT
+        // =========================================
+
+        createLogoutButton();
+
+
+        // =========================================
+        // ADMISSION FILTERS
+        // =========================================
+
+        setupAdmissionStatusFilter();
+
+        setupAdmissionFilters();
+
+        // =========================================
+        // STUDENT FILTERS
+        // =========================================
+
+        setupStudentFilters();
+
+
+        // =========================================
+        // LOAD STUDENTS
+        // =========================================
+
+        await loadStudents();
+
+
+        // =========================================
+        // LOAD ADMISSIONS
+        // =========================================
+
+        await loadAdmissionApplications();
+
+
+        // =========================================
+        // AUTH COMPLETE
+        // =========================================
+
+        document.body.classList.add(
+            "auth-checked"
+        );
+
+
+        console.log(
+            "Portal initialized successfully."
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Portal initialization failed:",
+            error
+        );
 
     }
-
-
-    // =========================================
-    // SAVE PROFILE
-    // =========================================
-
-    currentProfile =
-        profile;
-
-
-    console.log(
-        "Authenticated user:",
-        currentProfile
-    );
-
-
-    // =========================================
-    // UPDATE USER UI
-    // =========================================
-
-    updateUserInterface();
-
-
-    // =========================================
-    // ROLE UI
-    // =========================================
-
-    updateRoleBasedUI();
-
-
-    // =========================================
-    // SIDEBAR
-    // =========================================
-
-    setupSidebarNavigation();
-
-
-    // =========================================
-    // ADD STUDENT
-    // =========================================
-
-    setupAddStudentButtons();
-
-
-    // =========================================
-    // LOGOUT
-    // =========================================
-
-    createLogoutButton();
-
-
-    // =========================================
-    // ADMISSION FILTERS
-    // =========================================
-
-    setupAdmissionStatusFilter();
-
-    setupAdmissionFilters();
-
-    // =========================================
-    // STUDENT FILTERS
-    // =========================================
-
-    setupStudentFilters();
-
-
-    // =========================================
-    // LOAD STUDENTS
-    // =========================================
-
-    await loadStudents();
-
-
-    // =========================================
-    // LOAD ADMISSIONS
-    // =========================================
-
-    await loadAdmissionApplications();
-
-
-    // =========================================
-    // AUTH COMPLETE
-    // =========================================
-
-    document.body.classList.add(
-        "auth-checked"
-    );
-
-
-    console.log(
-        "Portal initialized successfully."
-    );
-
-
-} catch (error) {
-
-    console.error(
-        "Portal initialization failed:",
-        error
-    );
-
-}
 
 }
 
@@ -3607,8 +3711,8 @@ try {
 // =====================================================
 
 document.addEventListener(
-"DOMContentLoaded",
-initializePortal
+    "DOMContentLoaded",
+    initializePortal
 );
 
 // =====================================================
@@ -3617,211 +3721,211 @@ initializePortal
 
 async function loadReviewAssignmentData(application) {
 
-const academicYearSelect =
-    document.getElementById(
-        "review-academic-year"
-    );
+    const academicYearSelect =
+        document.getElementById(
+            "review-academic-year"
+        );
 
-const classSelect =
-    document.getElementById(
-        "review-class"
-    );
+    const classSelect =
+        document.getElementById(
+            "review-class"
+        );
 
-const sectionSelect =
-    document.getElementById(
-        "review-section"
-    );
-
-
-if (
-    !academicYearSelect ||
-    !classSelect ||
-    !sectionSelect
-) {
-    return;
-}
+    const sectionSelect =
+        document.getElementById(
+            "review-section"
+        );
 
 
-// =========================================
-// LOAD ACADEMIC YEARS
-// =========================================
+    if (
+        !academicYearSelect ||
+        !classSelect ||
+        !sectionSelect
+    ) {
+        return;
+    }
 
-academicYearSelect.innerHTML = `
+
+    // =========================================
+    // LOAD ACADEMIC YEARS
+    // =========================================
+
+    academicYearSelect.innerHTML = `
     <option value="">
         Loading...
     </option>
 `;
 
 
-const {
-    data: academicYears,
-    error: academicYearError
-} = await supabase
-    .from("academic_years")
-    .select(
-        "id, name, is_current"
-    )
-    .order(
-        "name",
-        {
-            ascending: false
-        }
-    );
+    const {
+        data: academicYears,
+        error: academicYearError
+    } = await supabase
+        .from("academic_years")
+        .select(
+            "id, name, is_current"
+        )
+        .order(
+            "name",
+            {
+                ascending: false
+            }
+        );
 
 
-if (academicYearError) {
+    if (academicYearError) {
 
-    console.error(
-        "Failed to load academic years:",
-        academicYearError
-    );
+        console.error(
+            "Failed to load academic years:",
+            academicYearError
+        );
 
 
-    academicYearSelect.innerHTML = `
+        academicYearSelect.innerHTML = `
         <option value="">
             Unable to load
         </option>
     `;
 
-} else {
+    } else {
 
-    academicYearSelect.innerHTML = `
+        academicYearSelect.innerHTML = `
         <option value="">
             Select academic year
         </option>
     `;
 
 
-    academicYears.forEach(year => {
+        academicYears.forEach(year => {
 
-        const option =
-            document.createElement(
-                "option"
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                year.id;
+
+
+            option.textContent =
+                year.name;
+
+
+            if (
+                year.id ===
+                application.academic_year_id
+            ) {
+
+                option.selected =
+                    true;
+
+            }
+
+
+            academicYearSelect.appendChild(
+                option
             );
 
+        });
 
-        option.value =
-            year.id;
-
-
-        option.textContent =
-            year.name;
+    }
 
 
-        if (
-            year.id ===
-            application.academic_year_id
-        ) {
+    // =========================================
+    // LOAD CLASSES
+    // =========================================
 
-            option.selected =
-                true;
-
-        }
-
-
-        academicYearSelect.appendChild(
-            option
-        );
-
-    });
-
-}
-
-
-// =========================================
-// LOAD CLASSES
-// =========================================
-
-classSelect.innerHTML = `
+    classSelect.innerHTML = `
     <option value="">
         Loading...
     </option>
 `;
 
 
-const {
-    data: classes,
-    error: classError
-} = await supabase
-    .from("classes")
-    .select(
-        "id, name, display_order"
-    )
-    .order(
-        "display_order",
-        {
-            ascending: true
-        }
-    );
+    const {
+        data: classes,
+        error: classError
+    } = await supabase
+        .from("classes")
+        .select(
+            "id, name, display_order"
+        )
+        .order(
+            "display_order",
+            {
+                ascending: true
+            }
+        );
 
 
-if (classError) {
+    if (classError) {
 
-    console.error(
-        "Failed to load classes:",
-        classError
-    );
+        console.error(
+            "Failed to load classes:",
+            classError
+        );
 
 
-    classSelect.innerHTML = `
+        classSelect.innerHTML = `
         <option value="">
             Unable to load
         </option>
     `;
 
-} else {
+    } else {
 
-    classSelect.innerHTML = `
+        classSelect.innerHTML = `
         <option value="">
             Select class
         </option>
     `;
 
 
-    classes.forEach(classItem => {
+        classes.forEach(classItem => {
 
-        const option =
-            document.createElement(
-                "option"
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                classItem.id;
+
+
+            option.textContent =
+                classItem.name;
+
+
+            if (
+                classItem.id ===
+                application.class_id
+            ) {
+
+                option.selected =
+                    true;
+
+            }
+
+
+            classSelect.appendChild(
+                option
             );
 
+        });
 
-        option.value =
-            classItem.id;
-
-
-        option.textContent =
-            classItem.name;
+    }
 
 
-        if (
-            classItem.id ===
-            application.class_id
-        ) {
+    // =========================================
+    // LOAD SECTIONS
+    // =========================================
 
-            option.selected =
-                true;
-
-        }
-
-
-        classSelect.appendChild(
-            option
-        );
-
-    });
-
-}
-
-
-// =========================================
-// LOAD SECTIONS
-// =========================================
-
-await loadReviewSections(
-    application.class_id,
-    application.preferred_section_id
-);
+    await loadReviewSections(
+        application.class_id,
+        application.preferred_section_id
+    );
 
 }
 
@@ -3830,120 +3934,120 @@ await loadReviewSections(
 // =====================================================
 
 async function loadReviewSections(
-classId,
-selectedSectionId = null
+    classId,
+    selectedSectionId = null
 ) {
 
-const sectionSelect =
-    document.getElementById(
-        "review-section"
-    );
+    const sectionSelect =
+        document.getElementById(
+            "review-section"
+        );
 
 
-if (!sectionSelect) {
-    return;
-}
+    if (!sectionSelect) {
+        return;
+    }
 
 
-if (!classId) {
+    if (!classId) {
 
-    sectionSelect.innerHTML = `
+        sectionSelect.innerHTML = `
         <option value="">
             Select class first
         </option>
     `;
 
 
-    return;
+        return;
 
-}
+    }
 
 
-sectionSelect.innerHTML = `
+    sectionSelect.innerHTML = `
     <option value="">
         Loading...
     </option>
 `;
 
 
-const {
-    data: sections,
-    error
-} = await supabase
-    .from("sections")
-    .select(
-        "id, name, class_id"
-    )
-    .eq(
-        "class_id",
-        classId
-    )
-    .order(
-        "name",
-        {
-            ascending: true
-        }
-    );
-
-
-if (error) {
-
-    console.error(
-        "Failed to load sections:",
+    const {
+        data: sections,
         error
-    );
+    } = await supabase
+        .from("sections")
+        .select(
+            "id, name, class_id"
+        )
+        .eq(
+            "class_id",
+            classId
+        )
+        .order(
+            "name",
+            {
+                ascending: true
+            }
+        );
 
 
-    sectionSelect.innerHTML = `
+    if (error) {
+
+        console.error(
+            "Failed to load sections:",
+            error
+        );
+
+
+        sectionSelect.innerHTML = `
         <option value="">
             Unable to load
         </option>
     `;
 
 
-    return;
+        return;
 
-}
+    }
 
 
-sectionSelect.innerHTML = `
+    sectionSelect.innerHTML = `
     <option value="">
         Select section
     </option>
 `;
 
 
-sections.forEach(section => {
+    sections.forEach(section => {
 
-    const option =
-        document.createElement(
-            "option"
+        const option =
+            document.createElement(
+                "option"
+            );
+
+
+        option.value =
+            section.id;
+
+
+        option.textContent =
+            section.name;
+
+
+        if (
+            section.id ===
+            selectedSectionId
+        ) {
+
+            option.selected =
+                true;
+
+        }
+
+
+        sectionSelect.appendChild(
+            option
         );
 
-
-    option.value =
-        section.id;
-
-
-    option.textContent =
-        section.name;
-
-
-    if (
-        section.id ===
-        selectedSectionId
-    ) {
-
-        option.selected =
-            true;
-
-    }
-
-
-    sectionSelect.appendChild(
-        option
-    );
-
-});
+    });
 
 }
