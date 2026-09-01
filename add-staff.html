@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Add Staff</title>
+
+
+    <link
+        rel="stylesheet"
+        href="css/styles.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/add-staff.css"
+    >
+
+</head>
+
+
+<body>
+
+    <!-- =================================================
+         TOP BAR
+    ================================================== -->
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button
+                type="button"
+                id="back-button"
+                class="back-button"
+            >
+                ← Back to Users
+            </button>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="user">
+
+                <div class="avatar">
+                    A
+                </div>
+
+
+                <div>
+
+                    <strong id="topbar-user-name">
+                        User
+                    </strong>
+
+                    <small id="topbar-user-role">
+                        Administrator
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="add-staff-page">
+
+
+        <div class="page-heading">
+
+            <h1>
+                Add Staff
+            </h1>
+
+            <p>
+                Create a new staff account and give them access to the portal.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             FORM CARD
+        ================================================== -->
+
+        <div class="add-staff-card">
+
+
+            <form
+                id="add-staff-form"
+                novalidate
+            >
+
+
+                <!-- =========================================
+                     STAFF INFORMATION
+                ========================================== -->
+
+                <section class="form-section">
+
+                    <h2>
+                        Staff Information
+                    </h2>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-field full-width">
+
+                            <label for="full-name">
+                                Full Name
+                                <span>*</span>
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="full-name"
+                                name="full_name"
+                                placeholder="Enter full name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="email">
+                                Email Address
+                                <span>*</span>
+                            </label>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter email address"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="Enter phone number"
+                                autocomplete="tel"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================================
+                     LOGIN INFORMATION
+                ========================================== -->
+
+                <section class="form-section">
+
+                    <h2>
+                        Login Information
+                    </h2>
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-field">
+
+                            <label for="password">
+                                Password
+                                <span>*</span>
+                            </label>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Minimum 8 characters"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+
+
+                            <small class="field-help">
+                                The staff member will use this password to sign in.
+                            </small>
+
+                        </div>
+
+
+                        <div class="form-field">
+
+                            <label for="confirm-password">
+                                Confirm Password
+                                <span>*</span>
+                            </label>
+
+
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                name="confirm_password"
+                                placeholder="Re-enter password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================================
+                     ACCOUNT DEFAULTS
+                ========================================== -->
+
+                <section class="form-section">
+
+                    <h2>
+                        Account Defaults
+                    </h2>
+
+
+                    <div class="default-info">
+
+
+                        <div class="default-item">
+
+                            <span>
+                                Role
+                            </span>
+
+                            <strong>
+                                Staff
+                            </strong>
+
+                        </div>
+
+
+                        <div class="default-item">
+
+                            <span>
+                                Status
+                            </span>
+
+                            <strong class="active-text">
+                                Active
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <p class="section-note">
+                        New accounts are created as Active Staff accounts.
+                        Role and permissions can be managed later.
+                    </p>
+
+                </section>
+
+
+                <!-- =========================================
+                     MESSAGE
+                ========================================== -->
+
+                <div
+                    id="form-message"
+                    class="form-message"
+                    role="alert"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- =========================================
+                     ACTIONS
+                ========================================== -->
+
+                <div class="form-actions">
+
+                    <button
+                        type="button"
+                        id="cancel-button"
+                        class="btn secondary-button"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="create-button"
+                        class="btn"
+                    >
+                        Create Staff
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <script
+        type="module"
+        src="js/add-staff.js"
+    ></script>
+
+</body>
+
+</html>

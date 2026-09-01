@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Profile</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/user-profile.css">
+
+</head>
+
+
+<body>
+
+    <header class="topbar">
+
+        <div class="topbar-left">
+
+            <button id="back-button" class="back-button" type="button">
+                ← Back to Users
+            </button>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+            <div class="user">
+
+                <div class="avatar">
+                    U
+                </div>
+
+                <div>
+                    <strong id="topbar-user-name">
+                        User
+                    </strong>
+
+                    <small id="topbar-user-role">
+                        Administrator
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="profile-page">
+
+        <div id="profile-loading" class="profile-message">
+            Loading user...
+        </div>
+
+
+        <div id="profile-error" class="profile-message error-message" style="display: none;">
+            Unable to load user.
+        </div>
+
+
+        <div id="user-profile-content" style="display: none;">
+
+            <!-- =============================================
+             PROFILE HEADER
+        ============================================== -->
+
+            <div class="profile-header">
+
+                <div class="profile-avatar" id="profile-avatar">
+                    U
+                </div>
+
+                <div class="profile-header-info">
+
+                    <div class="profile-name-row">
+
+                        <div>
+                            <h1 id="profile-name">
+                                User
+                            </h1>
+
+                            <p id="profile-role">
+                                Staff
+                            </p>
+
+                            <span id="profile-status" class="badge green-badge">
+                                Active
+                            </span>
+                        </div>
+
+                        <button type="button" id="delete-staff-button" class="delete-staff-button">
+                            Delete Staff
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+             STAFF INFORMATION
+        ============================================== -->
+
+            <div class="profile-card">
+
+                <h2>
+                    Staff Information
+                </h2>
+
+
+                <div class="profile-form-grid">
+
+                    <div class="form-field">
+
+                        <label for="full-name-input">
+                            Full Name
+                        </label>
+
+                        <input type="text" id="full-name-input" autocomplete="name">
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="phone-input">
+                            Phone
+                        </label>
+
+                        <input type="tel" id="phone-input" autocomplete="tel">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+             ACCOUNT MANAGEMENT
+        ============================================== -->
+
+            <div class="profile-card">
+
+                <h2>
+                    Account Management
+                </h2>
+
+
+                <div class="profile-form-grid">
+
+                    <div class="form-field">
+
+                        <label for="role-input">
+                            Role
+                        </label>
+
+                        <select id="role-input">
+
+                            <option value="staff">
+                                Staff
+                            </option>
+
+                            <option value="admin">
+                                Admin
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-field">
+
+                        <label for="status-input">
+                            Account Status
+                        </label>
+
+                        <select id="status-input">
+
+                            <option value="active">
+                                Active
+                            </option>
+
+                            <option value="inactive">
+                                Inactive
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+             ACCOUNT INFORMATION
+        ============================================== -->
+
+            <div class="profile-card">
+
+                <h2>
+                    Account Information
+                </h2>
+
+
+                <div class="profile-grid">
+
+                    <div class="profile-field">
+
+                        <span>
+                            User ID
+                        </span>
+
+                        <strong id="profile-user-id">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <span>
+                            Created
+                        </span>
+
+                        <strong id="profile-created">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <div class="profile-field">
+
+                        <span>
+                            Last Updated
+                        </span>
+
+                        <strong id="profile-updated">
+                            -
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================================
+             ACTIONS
+        ============================================== -->
+
+            <div class="profile-actions">
+
+                <button type="button" id="cancel-button" class="btn secondary-button">
+                    Cancel
+                </button>
+
+
+                <button type="button" id="save-button" class="btn">
+                    Save Changes
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Delete Staff Confirmation Modal -->
+    <div id="delete-staff-modal" class="delete-modal" style="display: none;">
+        <div class="delete-modal-overlay"></div>
+
+        <div class="delete-modal-content" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+
+            <h2 id="delete-modal-title">
+                Delete Staff Account?
+            </h2>
+
+            <p>
+                Are you sure you want to permanently delete
+                <strong id="delete-staff-name">this staff member</strong>?
+            </p>
+
+            <p class="delete-warning">
+                This action cannot be undone. The staff member
+                will no longer be able to sign in.
+            </p>
+
+            <div class="delete-modal-actions">
+
+                <button type="button" id="delete-modal-cancel" class="btn secondary-button">
+                    Cancel
+                </button>
+
+                <button type="button" id="delete-modal-confirm" class="btn delete-confirm-button">
+                    Delete Permanently
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <script type="module" src="js/user-profile.js"></script>
+
+</body>
+
+</html>

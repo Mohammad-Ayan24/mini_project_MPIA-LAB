@@ -99,6 +99,21 @@ function setupSidebarNavigation() {
                     await loadAdmissionApplications();
 
                 }
+                if (
+                    pageId === "users"
+                ) {
+
+                    if (
+                        currentProfile?.role !== "admin"
+                    ) {
+
+                        return;
+
+                    }
+
+                    await loadUsers();
+
+                }
 
             }
         );
@@ -3562,6 +3577,549 @@ async function rejectCurrentApplication() {
 
 }
 
+
+// =====================================================
+// USER MANAGEMENT
+// =====================================================
+
+let allUsers = [];
+
+
+// =====================================================
+// LOAD USERS
+// =====================================================
+
+async function loadUsers() {
+
+    const tableBody =
+        document.getElementById(
+            "users-table-body"
+        );
+
+
+    if (!tableBody) {
+
+        return;
+
+    }
+
+
+    // =========================================
+    // ADMIN CHECK
+    // =========================================
+
+    if (
+        currentProfile?.role !== "admin"
+    ) {
+
+        return;
+
+    }
+
+
+    tableBody.innerHTML = `
+        <tr>
+            <td colspan="6">
+                Loading users...
+            </td>
+        </tr>
+    `;
+
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabase
+            .from("profiles")
+            .select(`
+                id,
+                full_name,
+                role,
+                phone,
+                is_active,
+                created_at
+            `)
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            console.error(
+                "Failed to load users:",
+                error
+            );
+
+
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6">
+                        Unable to load users.
+                    </td>
+                </tr>
+            `;
+
+
+            return;
+
+        }
+
+
+        allUsers =
+            data || [];
+
+
+        renderUsers(
+            allUsers
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Unexpected user loading error:",
+            error
+        );
+
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    Unable to load users.
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+// =====================================================
+// RENDER USERS
+// =====================================================
+
+function renderUsers(
+    users
+) {
+
+    const tableBody =
+        document.getElementById(
+            "users-table-body"
+        );
+
+
+    if (!tableBody) {
+
+        return;
+
+    }
+
+
+    if (
+        !users ||
+        users.length === 0
+    ) {
+
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6">
+                    No users found.
+                </td>
+            </tr>
+        `;
+
+
+        return;
+
+    }
+
+
+    tableBody.innerHTML = "";
+
+
+    users.forEach(
+        user => {
+
+            const row =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const userName =
+                user.full_name ||
+                "Unnamed User";
+
+
+            const firstLetter =
+                userName
+                    .charAt(0)
+                    .toUpperCase();
+
+
+            const role =
+                user.role ||
+                "staff";
+
+
+            const status =
+                user.is_active
+                    ? "Active"
+                    : "Inactive";
+
+
+            const statusClass =
+                user.is_active
+                    ? "green-badge"
+                    : "red-badge";
+
+
+            const createdDate =
+                user.created_at
+                    ? new Date(
+                        user.created_at
+                    ).toLocaleDateString(
+                        "en-IN",
+                        {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric"
+                        }
+                    )
+                    : "-";
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="student">
+
+                        <div class="student-img">
+
+                            ${escapeHtml(
+                firstLetter
+            )}
+
+                        </div>
+
+                        ${escapeHtml(
+                userName
+            )}
+
+                    </div>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHtml(
+                user.phone ||
+                "-"
+            )}
+
+                </td>
+
+
+                <td>
+
+                    <span class="badge">
+
+                        ${escapeHtml(
+                role === "admin"
+                    ? "Admin"
+                    : "Staff"
+            )}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                        class="badge ${statusClass}"
+                    >
+
+                        ${status}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    ${createdDate}
+
+                </td>
+
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="btn user-manage-button"
+                        data-user-id="${escapeHtml(
+                user.id
+            )}"
+                    >
+                        Manage
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tableBody.appendChild(
+                row
+            );
+            const manageButton =
+                row.querySelector(
+                    ".user-manage-button"
+                );
+
+
+            if (manageButton) {
+
+                manageButton.addEventListener(
+                    "click",
+                    event => {
+
+                        event.stopPropagation();
+
+
+                        const userId =
+                            manageButton.dataset.userId;
+
+
+                        if (!userId) {
+
+                            return;
+
+                        }
+
+
+                        window.open(
+                            `user-profile.html?id=${encodeURIComponent(
+                                userId
+                            )}`,
+                            "_blank"
+                        );
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+}
+
+// =====================================================
+// USER FILTERS
+// =====================================================
+
+function setupUserFilters() {
+
+    const searchInput =
+        document.getElementById(
+            "user-search"
+        );
+
+
+    const roleSelect =
+        document.getElementById(
+            "user-role-filter"
+        );
+
+
+    const statusSelect =
+        document.getElementById(
+            "user-status-filter"
+        );
+
+
+    if (
+        !searchInput ||
+        !roleSelect ||
+        !statusSelect
+    ) {
+
+        return;
+
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        applyUserFilters
+    );
+
+
+    roleSelect.addEventListener(
+        "change",
+        applyUserFilters
+    );
+
+
+    statusSelect.addEventListener(
+        "change",
+        applyUserFilters
+    );
+
+}
+
+
+// =====================================================
+// APPLY USER FILTERS
+// =====================================================
+
+function applyUserFilters() {
+
+    const searchInput =
+        document.getElementById(
+            "user-search"
+        );
+
+
+    const roleSelect =
+        document.getElementById(
+            "user-role-filter"
+        );
+
+
+    const statusSelect =
+        document.getElementById(
+            "user-status-filter"
+        );
+
+
+    const search =
+        searchInput?.value
+            .trim()
+            .toLowerCase() ||
+        "";
+
+
+    const selectedRole =
+        roleSelect?.value ||
+        "all";
+
+
+    const selectedStatus =
+        statusSelect?.value ||
+        "all";
+
+
+    const filteredUsers =
+        allUsers.filter(
+            user => {
+
+                const name =
+                    (
+                        user.full_name ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const phone =
+                    (
+                        user.phone ||
+                        ""
+                    )
+                        .toLowerCase();
+
+
+                const matchesSearch =
+                    !search ||
+                    name.includes(
+                        search
+                    ) ||
+                    phone.includes(
+                        search
+                    );
+
+
+                const matchesRole =
+                    selectedRole === "all" ||
+                    user.role ===
+                    selectedRole;
+
+
+                const userStatus =
+                    user.is_active
+                        ? "active"
+                        : "inactive";
+
+
+                const matchesStatus =
+                    selectedStatus === "all" ||
+                    userStatus ===
+                    selectedStatus;
+
+
+                return (
+                    matchesSearch &&
+                    matchesRole &&
+                    matchesStatus
+                );
+
+            }
+        );
+
+
+    renderUsers(
+        filteredUsers
+    );
+
+}
+
+// =====================================================
+// ADD STAFF
+// =====================================================
+
+function setupAddStaffButton() {
+
+    const button =
+        document.getElementById(
+            "add-staff-button"
+        );
+
+
+    if (!button) {
+
+        return;
+
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            window.open(
+                "add-staff.html",
+                "_blank"
+            );
+
+        }
+    );
+
+}
+
 // =====================================================
 // INITIALIZE PORTAL
 // =====================================================
@@ -3644,6 +4202,16 @@ async function initializePortal() {
         // NEW ADMISSION APPLICATION BUTTON FOR STAFF
         // =========================================
         setupNewAdmissionApplication();
+
+        // =========================================
+        // ADD STAFF BUTTON
+        // =========================================
+        setupAddStaffButton();
+
+        // =========================================
+        // USER MANAGEMENT FILTER
+        // =========================================
+        setupUserFilters();
 
         // =========================================
         // LOGOUT

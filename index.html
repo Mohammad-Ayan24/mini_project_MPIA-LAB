@@ -114,7 +114,7 @@
       </div>
 
 
-      <div class="nav-item" data-admin-only="true">
+      <div class="nav-item" data-page="users" data-admin-only="true">
         👤
         <span>Users</span>
       </div>
@@ -1360,9 +1360,127 @@
         </section>
 
 
+
+
+        <!-- =================================================
+     USER MANAGEMENT
+================================================== -->
+
+        <section id="users" class="page-section" data-admin-only="true">
+
+          <div class="page-header">
+
+            <div>
+              <h1>User Management</h1>
+
+              <p>
+                Manage staff accounts, roles, and access.
+              </p>
+            </div>
+
+            <button class="btn" id="add-staff-button">
+              + Add Staff
+            </button>
+
+          </div>
+
+
+          <div class="section-card">
+
+            <div class="filters">
+
+              <input type="text" id="user-search" placeholder="Search users...">
+
+              <select id="user-role-filter">
+
+                <option value="all">
+                  All Roles
+                </option>
+
+                <option value="admin">
+                  Admin
+                </option>
+
+                <option value="staff">
+                  Staff
+                </option>
+
+              </select>
+
+
+              <select id="user-status-filter">
+
+                <option value="all">
+                  All Status
+                </option>
+
+                <option value="active">
+                  Active
+                </option>
+
+                <option value="inactive">
+                  Inactive
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    User
+                  </th>
+
+                  <th>
+                    Phone
+                  </th>
+
+                  <th>
+                    Role
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                  <th>
+                    Created
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="users-table-body">
+
+                <tr>
+
+                  <td colspan="6">
+                    Loading users...
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
       </div>
-
-
     </main>
 
 

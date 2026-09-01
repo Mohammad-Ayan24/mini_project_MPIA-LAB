@@ -1,0 +1,449 @@
+/* =====================================================
+   ADD STAFF PAGE
+===================================================== */
+
+.add-staff-page {
+
+    padding: 30px;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =====================================================
+   PAGE HEADING
+===================================================== */
+
+.page-heading {
+
+    margin-bottom: 25px;
+
+}
+
+
+.page-heading h1 {
+
+    margin: 0 0 6px;
+
+    font-size: 28px;
+
+    color: #111827;
+
+}
+
+
+.page-heading p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.back-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    padding: 8px 0;
+
+}
+
+
+.back-button:hover {
+
+    color: #111827;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.add-staff-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+
+    padding: 30px;
+
+}
+
+
+/* =====================================================
+   FORM SECTION
+===================================================== */
+
+.form-section {
+
+    margin-bottom: 32px;
+
+}
+
+
+.form-section:last-of-type {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-section h2 {
+
+    margin: 0 0 20px;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    color: #111827;
+
+    font-size: 18px;
+
+}
+
+
+/* =====================================================
+   FORM GRID
+===================================================== */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 22px;
+
+}
+
+
+.full-width {
+
+    grid-column: 1 / -1;
+
+}
+
+
+/* =====================================================
+   FORM FIELD
+===================================================== */
+
+.form-field {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.form-field label {
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+}
+
+
+.form-field label span {
+
+    color: #dc2626;
+
+}
+
+
+.form-field input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 11px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-size: 14px;
+
+    outline: none;
+
+}
+
+
+.form-field input:focus {
+
+    border-color: #2563eb;
+
+}
+
+
+.form-field input:invalid:not(:placeholder-shown) {
+
+    border-color: #dc2626;
+
+}
+
+
+.field-help {
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   DEFAULT ACCOUNT INFO
+===================================================== */
+
+.default-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+}
+
+
+.default-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding: 15px;
+
+    background: #f9fafb;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 8px;
+
+}
+
+
+.default-item span {
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+}
+
+
+.default-item strong {
+
+    color: #111827;
+
+    font-size: 14px;
+
+}
+
+
+.active-text {
+
+    color: #166534 !important;
+
+}
+
+
+/* =====================================================
+   SECTION NOTE
+===================================================== */
+
+.section-note {
+
+    margin: 12px 0 0;
+
+    color: #6b7280;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.form-message {
+
+    display: none;
+
+    margin-bottom: 20px;
+
+    padding: 12px 14px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+}
+
+
+.form-message.success {
+
+    display: block;
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.form-message.error {
+
+    display: block;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+/* =====================================================
+   ACTIONS
+===================================================== */
+
+.form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #e5e7eb;
+
+}
+
+
+.secondary-button {
+
+    background: #ffffff;
+
+    color: #374151;
+
+    border: 1px solid #d1d5db;
+
+}
+
+
+.secondary-button:hover {
+
+    background: #f9fafb;
+
+}
+
+
+.form-actions button:disabled {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (
+    max-width: 700px
+) {
+
+    .add-staff-page {
+
+        padding: 20px;
+
+    }
+
+
+    .add-staff-card {
+
+        padding: 20px;
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .full-width {
+
+        grid-column: auto;
+
+    }
+
+
+    .default-info {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+    }
+
+
+    .form-actions button {
+
+        width: 100%;
+
+    }
+
+}
